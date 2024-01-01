@@ -111,7 +111,7 @@ def whoami(kaya,kontol):
     
 def ua_krek():
 	rr = random.randint
-	model = random.choice(['RMX1825','RMX1821','RMX1822','RMX1833','RMX1851','RMX1853'])
+	model = random.choice(['SM-G920F','CPH1869','CPH1929','CPH2238','CPH2389','CPH2401'])
 	ua = (f"Mozilla/5.0 (Linux; U; Android {str(rr(9,13))}; Vision3 Build/MRA58K) [FBAN/MessengerLite;FBAV/{str(rr(40,375))}.309.0.0.8.61;FBPN/com.facebook.mlite;FBLC/en_GB;FBBV/434647565;FBCR/AXIS;FBMF/Vision;FBBD/Vision;FBDV/Vision3;FBSV/{str(rr(9,13))};FBCA/arm64-v8a:null;FBDM/"+"{density=2.54375,width=720,height=1600};]")
 	return ua
 ###-----------------[]-----------------###
