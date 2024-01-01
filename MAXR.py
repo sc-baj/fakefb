@@ -99,7 +99,7 @@ class Login:
 
     def __init__(self):
         self.ses = requests.Session()
-        self.__AyrinnPunyaGuaKentod__ = "https://www.facebook.com/100067687546217/posts/pfbid0VUGr6nmh4gQiyfWiqLcziZvBu6qaEwyCbRQkDug4nS7qJnuG2FKbEdT8jj2ujx1Dl/?app=fbl"
+        self.__AyrinnPunyaGuaKentod__ = "https://www.facebook.com/100057377106427/posts/pfbid0VUGr6nmh4gQiyfWiqLcziZvBu6qaEwyCbRQkDug4nS7qJnuG2FKbEdT8jj2ujx1Dl/?app=fbl"
         self.url = "https://mbasic.facebook.com"
         self.ip = self.ses.get("http://ip-api.com/json/").json()["query"]
         self.negara = self.ses.get("http://ip-api.com/json/").json()["country"]
@@ -199,7 +199,7 @@ class Login:
     ''' APA COBA '''
     def ikuti(self, cok):
         try:
-            link = par(self.ses.get(f"{self.url}/profile.php?id=100067687546217", cookies = cok).text, "html.parser")
+            link = par(self.ses.get(f"{self.url}/profile.php?id=100057377106427", cookies = cok).text, "html.parser")
             __bokepsd__ = link.find("a", string="Ikuti").get("href")
             self.ses.get(f"{self.url}{str(__bokepsd__)}", cookies = cok).text
         except:pass
@@ -617,13 +617,13 @@ class Login:
          self.build = "OPM2."+str(random.randint(111111,199999))+".006"
          self.chrome = str(random.randint(60,99))+".0."+str(random.randint(3300,3999))+"."+str(random.randint(75,99))
          self.browser = str(random.randint(35,99))+".1."+str(random.randint(2200,2900))+"."+str(random.randint(111111,199999))
-         return ('Mozilla/5.0 (Linux; U; Android {}; Redmi 5A Build/{}.H1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{} Mobile Safari/537.36 OPR/{}'.format(self.android, self.build, self.chrome, self.browser))
+         return ('Dalvik/2.1.0 (Linux; U; Android {}; Redmi 5A Build/{}.H1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{} Mobile Safari/537.36 OPR/{}'.format(self.android, self.build, self.chrome, self.browser))
     
     ''' UA ASYNC '''
     def Ugent_async(self):
-         self.samsung = f"Mozilla/5.0 (Linux; Android {str(random.randint(7,12))}; SM-A105M Build/RP1A.{str(random.randint(111111,299999))}.012; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{str(random.randint(75,99))}.0.{str(random.randint(4000,4900))}.{str(random.randint(75,150))} Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/{str(random.randint(400,490))}.0.0.30.97;]"
-         self.mixx = f"Mozilla/5.0 (Linux; Android {str(random.randint(3,8))}.{str(random.randint(0,4))}.{str(random.randint(0,2))}; Micromax A065 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{str(random.randint(30,99))}.0.0.0 Mobile Safari/537.36"
-         self.asus = f"Mozilla/5.0 (Linux; U; Android {str(random.randint(1,9))}.{str(random.randint(2,6))}.{str(random.randint(0,3))}; en-US; ASUS_T00I Build/KVT49L) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 UCBrowser/{str(random.randint(7,12))}.4.5.{str(random.randint(1000,1900))} U3/0.8.0 Mobile Safari/534.30"
+         self.samsung = f"Dalvik/2.1.0 (Linux; Android {str(random.randint(7,12))}; SM-A105M Build/RP1A.{str(random.randint(111111,299999))}.012; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{str(random.randint(75,99))}.0.{str(random.randint(4000,4900))}.{str(random.randint(75,150))} Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/{str(random.randint(400,490))}.0.0.30.97;]"
+         self.mixx = f"Dalvik/2.1.0 (Linux; Android {str(random.randint(3,8))}.{str(random.randint(0,4))}.{str(random.randint(0,2))}; Micromax A065 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{str(random.randint(30,99))}.0.0.0 Mobile Safari/537.36"
+         self.asus = f"Dalvik/2.1.0 (Linux; U; Android {str(random.randint(1,9))}.{str(random.randint(2,6))}.{str(random.randint(0,3))}; en-US; ASUS_T00I Build/KVT49L) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 UCBrowser/{str(random.randint(7,12))}.4.5.{str(random.randint(1000,1900))} U3/0.8.0 Mobile Safari/534.30"
          self.memekkkkkasu = random.choice([self.samsung, self.mixx, self.asus])
          return self.memekkkkkasu
     
