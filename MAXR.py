@@ -481,7 +481,6 @@ class Login:
         __Araaaku__.append(Panel(f'{P2}[{H2}02{P2}]. ASYNC',width=24,padding=(0,4),style=f"bold white"))
         __Araaaku__.append(Panel(f'{P2}[{H2}03{P2}]. VALIDATE',width=22,padding=(0,2),style=f"bold white"))
         __Araaaku__.append(Panel(f'{P2} [{H2}04{P2}]. REGULER',width=22,padding=(0,2),style=f"bold white"))
-        __Araaaku__.append(Panel(f'{P2}  [{H2}05{P2}]. WEB FB',width=24,padding=(0,2),style=f"bold white"))
         __Araaaku__.append(Panel(f'{P2}[{H2}06{P2}]. GRAPH FB',width=22,padding=(0,2),style=f"bold white"))
         Console(width=70).print(Panel(f'''  Pilih Metode Login Sesuai Keinginan Anda,Coba Satu Persatu!!!''',title="Metode",style=f"bold white",padding=(0,1)))
         console.print(Columns(__Araaaku__))
